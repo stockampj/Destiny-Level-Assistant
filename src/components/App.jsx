@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PlayerCharacters from './PlayerCharacters';
+import Player from './Player';
 
 
 function App(){
   return (
     <div>
-      <PlayerCharacters />
+      <Player />
     </div>
   );
 }
