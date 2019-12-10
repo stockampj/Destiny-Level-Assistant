@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import PlayerCharacters from './PlayerCharacters';
 
 
 function App(){
   return (
     <div>
-      <h1>HELLO WORLD</h1>
+      <PlayerCharacters />
     </div>
   );
 }
 
-export default connect()(App);
+export default App;

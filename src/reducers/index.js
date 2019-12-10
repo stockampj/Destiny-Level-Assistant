@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import reducer1 from './reducer1';
+import playerReducer from './playerReducer';
 
 const rootReducer = combineReducers({
-  stateSlice1: reducer1
+  player: playerReducer
 });
 
 export default rootReducer;
+
+
