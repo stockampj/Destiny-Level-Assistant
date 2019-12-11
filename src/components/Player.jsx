@@ -17,7 +17,6 @@ function Player({ dispatch, player}){
   let action;
   return (
     <div>
-      <h1>HELLO WORLD</h1>
       <p>{userName}</p>
       {platformRender}
     </div>

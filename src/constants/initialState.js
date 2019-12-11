@@ -1,8 +1,9 @@
 const manifest = {};
 
 const activeplayer = {
-  userName: 'Robot Chickens',
-  bNetId: '888',
+  userName: 'Generic Name',
+  isFetching: false,
+  bNetId: '404',
   platform: 1,
   characters: {
     1: {
