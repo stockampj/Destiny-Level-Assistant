@@ -7,16 +7,16 @@ const activeplayer = {
   platform: 1,
   characters: {
     1: {
-      lightLevel: 750,
-      characterId: 1
+      lightLevel: -1,
+      charId: 1
     },
     2: {
-      lightLevel: 750,
-      characterId: 2
+      lightLevel: -1,
+      charId: 2
     },
     3: {
-      lightLevel: 750,
-      characterId: 3
+      lightLevel: -1,
+      charId: 3
     }
   }
 };

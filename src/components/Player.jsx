@@ -5,20 +5,20 @@ import { connect } from 'react-redux';
 
 
 function Player({ dispatch, player}){
-  let { userName, bNetId, platform, characters } = player;
-  let platformRender;
-  if (platform === 0) {
-    platformRender = <p>WeirdBOX</p>;
-  } else if (platform === 1){
-    platformRender = <p>XBOX</p>;
-  } else if (platform===2){
-    platformRender = <p>PS4</p>;            
+  let { userName, bNetId, membershipType, characters } = player;
+  let membershipTypeRender;
+  if (membershipType === 0) {
+    membershipTypeRender = <p>WeirdBOX</p>;
+  } else if (membershipType === 1){
+    membershipTypeRender = <p>XBOX</p>;
+  } else if (membershipType===2){
+    membershipTypeRender = <p>PS4</p>;            
   }
   let action;
   return (
     <div>
       <p>{userName}</p>
-      {platformRender}
+      {membershipTypeRender}
     </div>
   );
 }

@@ -6,8 +6,7 @@ export const changeState = (value1) => ({
   value1
 });
 
-let requestHeader = ({
-  method: 'GET',
+let requestHeaderGET = ({
   headers: {
     'x-api-key': 'bd67d9ad9aca4084a9794f755888ae6c'
   }
@@ -17,15 +16,15 @@ export function fetchPlayerMembershipId(userName) {
   return function (dispatch) {
     dispatch(searchForPlayer(userName));
     const userNameSearch = userName.replace(' ', '');
-    return fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${userNameSearch}/`, requestHeader).then(
+    return fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${userNameSearch}/`, requestHeaderGET).then(
       response => response.json(),
       error => console.log('An error occurred.', error)
-    ).then(function(json) {
-      console.log('CHECK OUT THIS SWEET API RESPONSE:', json)
+      ).then(function(json) {
       if (json.Message === 'Ok'){
-        const bNetId = json.Response.membershipId;
-        userName = json.Response.displayName;
-        console.log(bNetId);
+        const bNetId = json.Response[0].membershipId;
+        const membershipType = json.Response[0].membershipType;       
+        userName = json.Response[0].displayName;
+        fetchPlayerProfileData(bNetId, membershipType, userName, dispatch);
       } else {
         console.log(json.Message);
         // ERROR CODE HANDLING NEEDED
@@ -39,8 +38,44 @@ export const searchForPlayer = (userName) => ({
   userName,
 });
 
+export const fetchPlayerProfileData = (bNetId, membershipType, userName, dispatch) => {
+  console.log(bNetId, membershipType)
+  return fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${bNetId}/?components=100`, requestHeaderGET).then(
+    response => response.json(),
+    error => console.log('An error occurred.', error)
+  ).then(function(json) {
+    let characterIdArray;
+    let char1Id = -1;
+    let char2Id = -1;
+    let char3Id = -1;
+    if (json.Message === 'Ok'){
+      if (json.Response.profile.data.characterIds){
+        characterIdArray = json.Response.profile.data.characterIds;
+        console.log(characterIdArray);
+        for (let i=0; i<characterIdArray.length; i++){
+          if (i===0){
+            char1Id = characterIdArray[i];
+          } else if (i===1){
+            char2Id = characterIdArray[i];
+          } else if (i===2){
+            char3Id = characterIdArray[i];
+          }
+        }    
+      }
+    dispatch(updatePlayerCharacters(bNetId, membershipType, userName, char1Id, char2Id, char3Id));
+    } else {
+      console.log(json.Message);
+      // ERROR CODE HANDLING NEEDED
+    }
+  });
+}
 
-
-
-
-
+export const updatePlayerCharacters = (bNetId, membershipType, userName, char1Id, char2Id, char3Id) => ({
+  type: types.UPDATE_PLAYER_CHARACTERS,
+  userName,
+  membershipType,
+  bNetId,
+  char1Id,
+  char2Id,
+  char3Id
+});
