@@ -79,3 +79,6 @@ export const updatePlayerCharacters = (bNetId, membershipType, userName, char1Id
   char2Id,
   char3Id
 });
+
+
+// https://www.bungie.net/Platform//Destiny2/{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}/Collectibles/{collectiblePresentationNodeHash}/
