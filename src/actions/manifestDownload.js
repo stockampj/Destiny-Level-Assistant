@@ -8,7 +8,7 @@ let requestHeaderGET = ({
   }
 });
 
-export function fetchDestinyManifest() {
+export function fetchManifestVersion() {
   return function (dispatch) {
     dispatch(startManifestDownload());
     return fetch('https://www.bungie.net/Platform/Destiny2/Manifest/', requestHeaderGET).then(
@@ -16,9 +16,9 @@ export function fetchDestinyManifest() {
       error => console.log('An error occurred.', error)
       ).then(function(json) {
       if (json.Message === 'Ok'){
-        const downloadPath = json.Response.mobileWorldContentPaths.en;
-        console.log(downloadPath);
-        // fetchPlayerProfileData(bNetId, membershipType, userName, dispatch);
+        const downloadPath = json.Response.jsonWorldContentPaths.en;
+        const manifestVersion = json.Response.version;
+        fetchDestinyManifest(downloadPath, manifestVersion);
       } else {
         console.log(json.Message);
         // ERROR CODE HANDLING NEEDED
@@ -31,6 +31,17 @@ export const startManifestDownload = () => ({
   type: types.START_MANIFEST_DOWNLOAD
 });
 
+export function fetchDestinyManifest(downloadPath, manifestVersion){
+  console.log("starting request");
+  const fetchManfestPath = `https://www.bungie.net${downloadPath}`;
+  console.log(fetchManfestPath)
+  return fetch(fetchManfestPath).then(
+    response => response.json(),
+    error => console.log('An error occurred.', error)
+    ).then(function(json) {
+      console.log(json);
+    });   
+}
 
 
 // async function downloadManifest(liveManifest) {

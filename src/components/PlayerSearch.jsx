@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPlayerMembershipId } from './../actions';
 import PropTypes from 'prop-types';
-import { fetchDestinyManifest } from '../actions/manifestDownload';
+import { fetchManifestVersion } from '../actions/manifestDownload';
 
 function PlayerSearch({ dispatch }){
   let input;
@@ -20,7 +20,7 @@ function PlayerSearch({ dispatch }){
         <button type='submit' >Search</button>
       </form>
 
-      <button onClick={() => {dispatch(fetchDestinyManifest())}}>DL MANIFEST</button>
+      <button onClick={() => {dispatch(fetchManifestVersion())}}>DL MANIFEST</button>
   
     
     </div>
