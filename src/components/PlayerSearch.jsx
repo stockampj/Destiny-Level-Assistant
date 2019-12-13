@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPlayerMembershipId } from './../actions';
 import PropTypes from 'prop-types';
+import { fetchDestinyManifest } from '../actions/manifestDownload';
 
 function PlayerSearch({ dispatch }){
   let input;
@@ -18,6 +19,10 @@ function PlayerSearch({ dispatch }){
         <input placeholder="PSN XBOX or Steam UserName" ref={node => {input = node;}}></input>
         <button type='submit' >Search</button>
       </form>
+
+      <button onClick={() => {dispatch(fetchDestinyManifest())}}>DL MANIFEST</button>
+  
+    
     </div>
   );
 }

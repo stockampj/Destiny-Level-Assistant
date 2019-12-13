@@ -37,13 +37,3 @@ const playerReducer = (state = initialState.player, action) => {
 };
 
 export default playerReducer;
-
-export const updatePlayerCharacters = (bNetId, membershipType, userName, char1Id, char2Id, char3Id) => ({
-  type: types.UPDATE_PLAYER_CHARACTERS,
-  userName,
-  membershipType,
-  userName,
-  char1Id,
-  char2Id,
-  char3Id
-});

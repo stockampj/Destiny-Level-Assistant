@@ -1,5 +1,3 @@
-const manifest = {};
-
 const activeplayer = {
   userName: 'Generic Name',
   isFetching: false,
@@ -21,7 +19,10 @@ const activeplayer = {
   }
 };
 
+const manifest = {};
+
 export const initialState = {
-  player: activeplayer
+  player: activeplayer,
+  manifest: manifest
 };
 
