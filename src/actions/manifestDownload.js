@@ -28,7 +28,7 @@ export function fetchManifestVersion() {
 }
 
 export const startManifestDownload = () => ({
-  type: types.START_MANIFEST_DOWNLOAD
+  type: types.FETCH_MANIFEST_VERSION
 });
 
 export function fetchDestinyManifest(downloadPath, manifestVersion){
@@ -42,7 +42,7 @@ export function fetchDestinyManifest(downloadPath, manifestVersion){
       console.log(json);
     });   
 }
-
+//test
 
 // async function downloadManifest(liveManifest) {
 //   const response = await request(liveManifest.jsonWorldContentPaths.en);
