@@ -1,5 +1,5 @@
-// const fs = require("fs");
-// const path = require("path");
+const fs = require("fs");
+const path = require("path");
 import * as types from './../constants/ActionTypes';
 
 let requestHeaderGET = ({
@@ -28,38 +28,17 @@ export function fetchManifestVersion() {
 }
 
 export const startManifestDownload = () => ({
-  type: types.FETCH_MANIFEST_VERSION
+  type: types.START_MANIFEST_DOWNLOAD
 });
 
 export function fetchDestinyManifest(downloadPath, manifestVersion){
-  console.log("starting request");
   const fetchManfestPath = `https://www.bungie.net${downloadPath}`;
   console.log(fetchManfestPath)
   return fetch(fetchManfestPath).then(
     response => response.json(),
     error => console.log('An error occurred.', error)
     ).then(function(json) {
-      console.log(json);
+      console.log('json in tact');
+      console.log(json)
     });   
 }
-//test
-
-// async function downloadManifest(liveManifest) {
-//   const response = await request(liveManifest.jsonWorldContentPaths.en);
-
-//   if (!response) return false;
-
-//   manifestData = response;
-
-//   const target = `./manifest/json/${path.basename(liveManifest.jsonWorldContentPaths.en, '.json')}`;
-
-//   if (!fs.existsSync(target)) {
-//     await fs.promises.mkdir(target, { recursive: true });
-//   }
-
-//   await fs.promises.writeFile(`${target}/data.json`, JSON.stringify(response), { flag: 'w' });
-//   await fs.promises.writeFile(`${target}/index.json`, JSON.stringify(liveManifest), { flag: 'w' });
-//   await fs.promises.writeFile(`./manifest/index.json`, JSON.stringify(liveManifest), { flag: 'w' });
-
-//   return response;
-// }
