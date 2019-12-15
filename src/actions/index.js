@@ -63,7 +63,7 @@ export const fetchPlayerProfileData = (bNetId, membershipType, userName, dispatc
         }    
       }
     dispatch(updatePlayerCharacters(bNetId, membershipType, userName, char1Id, char2Id, char3Id));
-    fetchEquippedItems(bNetId, membershipType, userName, char1Id, char2Id, char3Id);
+    fetchEquippedItems(bNetId, membershipType, userName, char1Id, char2Id, char3Id, dispatch);
   } else {
       console.log(json.Message);
       // ERROR CODE HANDLING NEEDED
@@ -89,7 +89,7 @@ function bucketFilter (bucketHash) {
   return false;
 }
 
-export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, char2Id, char3Id) => {
+export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, char2Id, char3Id, dispatch) => {
   let char1Equipment = {};
   let char2Equipment = {};
   let char3Equipment = {};
@@ -112,7 +112,7 @@ export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, ch
           [3]: char3Equipment
         }
         if (char2Id === -1){
-          fetchEquipmentStats(bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray)
+          fetchEquipmentStats(bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray, dispatch);
         }
       }
       if (char2Id !== -1){
@@ -134,7 +134,7 @@ export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, ch
               [3]: char3Equipment
             }
             if (char3Id === -1){
-              fetchEquipmentStats(bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray)
+              fetchEquipmentStats(bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray, dispatch);
             }
           }
           if (char3Id !== -1){
@@ -155,7 +155,7 @@ export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, ch
                   [2]: char2Equipment,
                   [3]: char3Equipment
                 }
-                fetchEquipmentStats(bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray)
+                fetchEquipmentStats(bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray, dispatch);
               }
             })
           }
@@ -165,11 +165,48 @@ export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, ch
   }
 }
 
-export const fetchEquipmentStats = (bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray) => {
-  console.log("You are a fountain of coding")
+export const fetchEquipmentStats = (bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray, dispatch) => {
+  console.log("You are a fountain of coding prowess");
+  let equipmentArrayKeys = Object.keys(equipmentArray);
+  equipmentArrayKeys.forEach(equipmentArrayKey => {
+    let characterEquipment = equipmentArray[equipmentArrayKey];
+    let characterEquipmentKeys = Object.keys(characterEquipment);
+    characterEquipmentKeys.forEach(characterEquipmentKey =>{
+      let item = characterEquipment[characterEquipmentKey];
+      fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${bNetId}/Item/${item.itemInstanceId}/?components=300`, requestHeaderGET)
+      .then(
+        response => response.json(),
+        error => console.log('An error occurred.', error)
+      ).then(json =>{
+        if (json.Message === 'Ok'){
+          let itemLightLevel = 0;
+          if (json.Response.instance.data.primaryStat){
+            itemLightLevel = json.Response.instance.data.primaryStat.value;
+          }
+          const updatedItem = {
+            itemHash: item.itemHash,
+            itemInstanceId: item.itemInstanceId,
+            bucketHash: item.bucketHash,
+            itemLightLevel: itemLightLevel
+          };
+          equipmentArray[equipmentArrayKey][characterEquipmentKey] = updatedItem
+          dispatch(updateEquipmentFromAPI(bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray));
+        }
+      })
+    })
+  })
 }
 
-
+export const updateEquipmentFromAPI = (bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray) => ({
+  type: types.UPDATE_EQUIPMENT_FROM_API,
+  userName,
+  membershipType,
+  bNetId,
+  char1Id,
+  char2Id,
+  char3Id,
+  equipmentArray
+});
 
 
 
