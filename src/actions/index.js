@@ -1,5 +1,4 @@
 import * as types from './../constants/ActionTypes';
-import v4 from 'uuid/v4';
 
 export const changeState = (value1) => ({
   type: types.CHANGE_STATE,
@@ -64,7 +63,8 @@ export const fetchPlayerProfileData = (bNetId, membershipType, userName, dispatc
         }    
       }
     dispatch(updatePlayerCharacters(bNetId, membershipType, userName, char1Id, char2Id, char3Id));
-    } else {
+    fetchEquippedItems(bNetId, membershipType, userName, char1Id, char2Id, char3Id);
+  } else {
       console.log(json.Message);
       // ERROR CODE HANDLING NEEDED
     }
@@ -81,5 +81,74 @@ export const updatePlayerCharacters = (bNetId, membershipType, userName, char1Id
   char3Id
 });
 
+function bucketFilter (bucketHash) {
+  let bucketArray = [1498876634, 2465295065, 953998645, 1506418338, 3448274439, 3551918588, 14239492, 20886954, 1585787867];
+  if (bucketArray.includes(bucketHash)){
+    return true;
+  }
+  return false;
+}
+
+export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, char2Id, char3Id) => {
+  let char1Equipment = {};
+  let char2Equipment = {};
+  let char3Equipment = {};
+  if (char1Id !== -1){
+    return fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${bNetId}/Character/${char1Id}/?components=205`, requestHeaderGET)
+    .then(
+      response => response.json(),
+      error => console.log('An error occurred.', error)
+    ).then(json => {
+      if (json.Message === 'Ok'){
+        json.Response.equipment.data.items.forEach(item => {
+          if (bucketFilter(item.bucketHash)){
+            let itemObject = { [item.bucketHash]: item}
+            char1Equipment = Object.assign({}, char1Equipment, itemObject);
+          }
+        })
+      }
+      if (char2Id !== -1){
+        return fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${bNetId}/Character/${char2Id}/?components=205`, requestHeaderGET)
+        .then(
+          response => response.json(),
+          error => console.log('An error occurred.', error)
+        ).then(json => {
+          if (json.Message === 'Ok'){
+            json.Response.equipment.data.items.forEach(item => {
+              if (bucketFilter(item.bucketHash)){
+                let itemObject = { [item.bucketHash]: item}
+                char2Equipment = Object.assign({}, char2Equipment, itemObject);
+              }
+            })
+          }
+          if (char3Id !== -1){
+            return fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${bNetId}/Character/${char3Id}/?components=205`, requestHeaderGET)
+            .then(
+              response => response.json(),
+              error => console.log('An error occurred.', error)
+            ).then(json => {
+              if (json.Message === 'Ok'){
+                json.Response.equipment.data.items.forEach(item => {
+                  if (bucketFilter(item.bucketHash)){
+                    let itemObject = { [item.bucketHash]: item}
+                    char3Equipment = Object.assign({}, char3Equipment, itemObject);
+                  }
+                })
+              console.log("cycle: 3", char1Equipment, char2Equipment, char3Equipment)
+              }
+            })
+          }
+        console.log("cycle: 2", char1Equipment, char2Equipment, char3Equipment)
+        })
+      }
+    console.log("cycle: 1", char1Equipment, char2Equipment, char3Equipment)
+    })
+  }
+}
+
+
+
+
 
 // https://www.bungie.net/Platform//Destiny2/{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}/Collectibles/{collectiblePresentationNodeHash}/
+

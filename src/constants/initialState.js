@@ -1,21 +1,35 @@
+const itemStats = {
+  itemHash: -1,
+  itemInstanceId: -1,
+  itemLightLevel: -1
+}
+
+const charStats = {
+  lightLevel: -1,
+  charId: 1,
+  charArmor: {
+    head: itemStats,
+    arms: itemStats,
+    chest: itemStats,
+    legs: itemStats,
+    class: itemStats  
+  }
+}
+
 const activeplayer = {
   userName: 'Generic Name',
   isFetching: false,
-  bNetId: '404',
-  platform: 1,
+  bNetId: -1,
+  platform: -1,
   characters: {
-    1: {
-      lightLevel: -1,
-      charId: 1
-    },
-    2: {
-      lightLevel: -1,
-      charId: 2
-    },
-    3: {
-      lightLevel: -1,
-      charId: 3
-    }
+    1: charStats,
+    2: charStats,
+    3: charStats
+  },
+  weapons: {
+    kinetic: itemStats,
+    energy: itemStats,
+    power: itemStats
   }
 };
 
