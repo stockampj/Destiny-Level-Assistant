@@ -20,13 +20,13 @@ export function fetchPlayerMembershipId(userName) {
       response => response.json(),
       error => console.log('An error occurred.', error)
       ).then(function(json) {
-      if (json.Message === 'Ok'){
+      if ((json.Message === 'Ok')&&(json.Response.length>0)){
         const bNetId = json.Response[0].membershipId;
         const membershipType = json.Response[0].membershipType;       
         userName = json.Response[0].displayName;
         fetchPlayerProfileData(bNetId, membershipType, userName, dispatch);
       } else {
-        console.log(json.Message);
+        console.log('could not find player');
         // ERROR CODE HANDLING NEEDED
       }
     });   
@@ -106,6 +106,14 @@ export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, ch
             char1Equipment = Object.assign({}, char1Equipment, itemObject);
           }
         })
+        const equipmentArray = {
+          [1]: char1Equipment,
+          [2]: char2Equipment,
+          [3]: char3Equipment
+        }
+        if (char2Id === -1){
+          fetchEquipmentStats(bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray)
+        }
       }
       if (char2Id !== -1){
         return fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${bNetId}/Character/${char2Id}/?components=205`, requestHeaderGET)
@@ -120,6 +128,14 @@ export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, ch
                 char2Equipment = Object.assign({}, char2Equipment, itemObject);
               }
             })
+            const equipmentArray = {
+              [1]: char1Equipment,
+              [2]: char2Equipment,
+              [3]: char3Equipment
+            }
+            if (char3Id === -1){
+              fetchEquipmentStats(bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray)
+            }
           }
           if (char3Id !== -1){
             return fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${bNetId}/Character/${char3Id}/?components=205`, requestHeaderGET)
@@ -134,21 +150,28 @@ export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, ch
                     char3Equipment = Object.assign({}, char3Equipment, itemObject);
                   }
                 })
-              console.log("cycle: 3", char1Equipment, char2Equipment, char3Equipment)
+                const equipmentArray = {
+                  [1]: char1Equipment,
+                  [2]: char2Equipment,
+                  [3]: char3Equipment
+                }
+                fetchEquipmentStats(bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray)
               }
             })
           }
-        console.log("cycle: 2", char1Equipment, char2Equipment, char3Equipment)
         })
       }
-    console.log("cycle: 1", char1Equipment, char2Equipment, char3Equipment)
     })
   }
+}
+
+export const fetchEquipmentStats = (bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray) => {
+  console.log("You are a fountain of coding")
 }
 
 
 
 
 
-// https://www.bungie.net/Platform//Destiny2/{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}/Collectibles/{collectiblePresentationNodeHash}/
+
 
