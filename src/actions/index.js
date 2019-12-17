@@ -51,7 +51,6 @@ export const fetchPlayerProfileData = (bNetId, membershipType, userName, dispatc
     if (json.Message === 'Ok'){
       if (json.Response.profile.data.characterIds){
         characterIdArray = json.Response.profile.data.characterIds;
-        console.log(characterIdArray);
         for (let i=0; i<characterIdArray.length; i++){
           if (i===0){
             char1Id = characterIdArray[i];
@@ -166,13 +165,15 @@ export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, ch
 }
 
 export const fetchEquipmentStats = (bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray, dispatch) => {
-  console.log("You are a fountain of coding prowess");
+  let dispatchCount = 0;
+  let responseCount = 0;
   let equipmentArrayKeys = Object.keys(equipmentArray);
   equipmentArrayKeys.forEach(equipmentArrayKey => {
     let characterEquipment = equipmentArray[equipmentArrayKey];
     let characterEquipmentKeys = Object.keys(characterEquipment);
     characterEquipmentKeys.forEach(characterEquipmentKey =>{
       let item = characterEquipment[characterEquipmentKey];
+      dispatchCount++;
       fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${bNetId}/Item/${item.itemInstanceId}/?components=300`, requestHeaderGET)
       .then(
         response => response.json(),
@@ -189,7 +190,12 @@ export const fetchEquipmentStats = (bNetId, membershipType, userName, char1Id, c
             bucketHash: item.bucketHash,
             itemLightLevel: itemLightLevel
           };
-          equipmentArray[equipmentArrayKey][characterEquipmentKey] = updatedItem
+          equipmentArray[equipmentArrayKey][characterEquipmentKey] = updatedItem;
+        }
+        responseCount++;
+        //this may be unstable because it may delay updates if last response never comes back.
+        if (dispatchCount === responseCount){
+          console.log('you made it')
           dispatch(updateEquipmentFromAPI(bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray));
         }
       })

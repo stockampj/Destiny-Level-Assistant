@@ -1,7 +1,8 @@
 const itemStats = {
   itemHash: -1,
   itemInstanceId: -1,
-  itemLightLevel: -1
+  itemLightLevel: -1,
+  bucketHash: -1
 }
 
 const charStats = {
@@ -20,7 +21,7 @@ const activeplayer = {
   userName: 'Generic Name',
   isFetching: false,
   bNetId: -1,
-  platform: -1,
+  membershipType: -1,
   characters: {
     1: charStats,
     2: charStats,

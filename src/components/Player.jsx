@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { restartSong, changeSong } from './../actions';
-
 
 function Player({ dispatch, player}){
   let { userName, bNetId, membershipType, characters } = player;
@@ -18,6 +16,7 @@ function Player({ dispatch, player}){
   return (
     <div>
       <p>{userName}</p>
+      <p>{bNetId}</p>
       {membershipTypeRender}
     </div>
   );

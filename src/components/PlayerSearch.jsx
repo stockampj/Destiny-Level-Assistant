@@ -19,10 +19,7 @@ function PlayerSearch({ dispatch }){
         <input placeholder="PSN XBOX or Steam UserName" ref={node => {input = node;}}></input>
         <button type='submit' >Search</button>
       </form>
-
       <button onClick={() => {dispatch(fetchManifestVersion())}}>DL MANIFEST</button>
-  
-    
     </div>
   );
 }
