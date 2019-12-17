@@ -54,8 +54,7 @@ const playerReducer = (state = initialState.player, action) => {
         Object.keys(charArmorArray[equipmentArrayKey-1]).forEach(itemKey => {
           let oldItem = charArmorArray[equipmentArrayKey-1][itemKey]
           let newItem = tempCharArmor[itemKey]
-          tempCharArmor[itemKey] = (newItem.itemLightLevel>oldItem.itemLightLevel) ? newItem : oldItem;
-          
+          tempCharArmor[itemKey] = (newItem.itemLightLevel>oldItem.itemLightLevel) ? newItem : oldItem;    
         })
         charArmorArray[equipmentArrayKey-1] = tempCharArmor;
       }
