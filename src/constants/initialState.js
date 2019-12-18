@@ -3,11 +3,14 @@ const itemStats = {
   itemInstanceId: -1,
   itemLightLevel: -1,
   bucketHash: -1
-}
+};
 
 const charStats = {
   lightLevel: -1,
   charId: 1,
+  classHash: -1,
+  raceHash: -1,
+  emblemPath: '',
   charArmor: {
     head: itemStats,
     arms: itemStats,
@@ -15,7 +18,7 @@ const charStats = {
     legs: itemStats,
     class: itemStats  
   }
-}
+};
 
 const activeplayer = {
   userName: 'Generic Name',

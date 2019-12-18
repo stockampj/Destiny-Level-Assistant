@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Player from './Player';
-import PlayerSearch from './PLayerSearch';
+import Background from './Background';
+import BackgroundMovement from './BackgroundMovement';
+import SearchAndSelectionTools from './SearchAndSelectionTools';
 
 
 function App(){
   return (
     <div>
-      <PlayerSearch />
+      <Background />
+      <BackgroundMovement />
+      <SearchAndSelectionTools />
       <Player />
     </div>
   );

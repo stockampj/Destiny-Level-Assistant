@@ -33,6 +33,13 @@ module.exports = {
   module: {
     rules: [
       {
+        test:/\.css/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
         test: /\.jsx?$/,
         enforce: "pre",
         loader: "eslint-loader",
@@ -54,6 +61,16 @@ module.exports = {
           plugins: [
             "react-hot-loader/babel"
           ]
+        }
+      },
+      {
+        test: /\.(png|gif|jp(e*)g|svg)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 8000,
+            name: 'images/[hash]-[name].[ext]'
+          }
         }
       }
     ]

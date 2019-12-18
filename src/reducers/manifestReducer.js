@@ -9,6 +9,11 @@ const manifestReducer = (state = initialState.manifest, action) => {
       isFetching: true
     });
     return newManifestState;
+  case types.UPDATE_STORE_MANIFEST:
+    newManifestState = {
+      manifest: action.destinyManifest
+    }
+    return newManifestState
   default:
     return state;
   }

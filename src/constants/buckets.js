@@ -22,3 +22,12 @@ export const bucketToType = {
   General: 138197802,
   SeasonalArtifacts: 1506418338
 }; 
+
+export const classDefinitions = {
+  671679327: 'Hunter',
+  2271682572: 'Warlock',
+  3655393761: 'Titan',
+  2803282938: 'Awoken',
+  898834093: 'Exo',
+  3887404748: 'Human'
+}
