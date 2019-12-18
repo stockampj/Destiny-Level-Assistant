@@ -21,7 +21,7 @@ const charStats = {
 };
 
 const activeplayer = {
-  userName: 'Generic Name',
+  userName: '',
   isFetching: false,
   bNetId: -1,
   membershipType: -1,
@@ -41,6 +41,7 @@ const manifest = {};
 
 export const initialState = {
   player: activeplayer,
-  manifest: manifest
+  manifest: manifest,
+  selectedCharacter: 0,
 };
 

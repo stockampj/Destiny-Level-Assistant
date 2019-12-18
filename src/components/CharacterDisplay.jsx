@@ -1,9 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import constants from './../constants';
+import { connect } from "react-redux";
+import { changeSelectedPlayer } from '../actions/selectCharacter';
 const { classDefinitions } = constants;
 
 function CharacterDisplay(props) {
+  let isCurrentlySelected = false;
+  console.log("selected Character",props.selectedCharacter)
+  console.log("characterIndex",props.characterIndex)
+  if (props.selectedCharacter == props.characterIndex){
+    isCurrentlySelected= true;
+  }
+
+  const onCharacterChange = () => {
+    props.dispatch(changeSelectedPlayer(props.characterIndex));
+  }
+
   let bannerURL1=`url(https://www.bungie.net${props.emblemPath[0]}/)`;
   let bannerURL2=`url(https://www.bungie.net${props.emblemPath[1]}/)`;
   let bannerURL3=`url(https://www.bungie.net${props.emblemPath[2]}/)`;
@@ -73,7 +86,7 @@ function CharacterDisplay(props) {
         }
         
       `}</style>
-      <div className={`display-holder ${backgroundClassName}`}>
+      <div className={`display-holder ${backgroundClassName}`} onClick={onCharacterChange}>
         <div className="titles">
           <h3 className='characterClass'>{classDefinitions[props.classHash]}</h3>
           <h3 className='characterRace'>{classDefinitions[props.raceHash]}</h3>
@@ -84,4 +97,4 @@ function CharacterDisplay(props) {
   );
 }
 
-export default CharacterDisplay;
+export default connect()(CharacterDisplay);

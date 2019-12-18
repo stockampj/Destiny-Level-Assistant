@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
 import PlayerSearch from './PlayerSearch';
 import CharacterDisplay from './CharacterDisplay';
 
-function SearchAndSelectionTools({ dispatch, player}){
-  let { userName, bNetId, membershipType, characters, isFetching } = player;
-
+function SearchAndSelectionTools({ dispatch, player, selectedCharacter}){
+  let { userName, characters } = player;
+  let charactersToDisplay;
+  if (selectedCharacter !== 0){}
   return (
     <div>
       <style jsx>{`
@@ -68,7 +68,8 @@ function SearchAndSelectionTools({ dispatch, player}){
         {/* <button className='btn home-button' to='/'><i className="fas fa-beer"><span className="btn-text"> HOME</span></i></button> */}
         <div className='nav-cluster'>
 
-            <CharacterDisplay 
+            <CharacterDisplay
+              selectedCharacter={selectedCharacter}
               lightLevel={characters[1].lightLevel}
               classHash={characters[1].classHash}
               raceHash={characters[1].raceHash}
@@ -78,6 +79,7 @@ function SearchAndSelectionTools({ dispatch, player}){
               key={1}
             />
             <CharacterDisplay 
+              selectedCharacter={selectedCharacter}
               lightLevel={characters[2].lightLevel}
               classHash={characters[2].classHash}
               raceHash={characters[2].raceHash}
@@ -86,7 +88,8 @@ function SearchAndSelectionTools({ dispatch, player}){
               charId={characters[2].charId}
               key={2}
             />
-            <CharacterDisplay 
+            <CharacterDisplay
+              selectedCharacter={selectedCharacter} 
               lightLevel={characters[3].lightLevel}
               classHash={characters[3].classHash}
               raceHash={characters[3].raceHash}
@@ -106,7 +109,8 @@ function SearchAndSelectionTools({ dispatch, player}){
 
 const mapStateToProps = state => {
   return {
-    player: state.player
+    player: state.player,
+    selectedCharacter: state.selectedCharacter
   };
 };
 
