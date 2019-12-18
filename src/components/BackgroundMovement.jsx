@@ -9,10 +9,10 @@ function BackgroundMovement(){
           position: fixed;
           z-index: -1;
           display: block;
-          margin-left: auto;
-          margin-right: auto;
-          width: 200%;
-          height: 200%;
+          margin-left: -50%;
+          margin-top: -25%;
+          width: 300%;
+          height: 300%;
           background-image: url(${backgroundMovement});
           background-position: center, center;
           background-size: 80%;

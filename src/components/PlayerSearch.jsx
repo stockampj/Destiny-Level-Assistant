@@ -15,9 +15,9 @@ function PlayerSearch({ dispatch, userName }) {
             width: 300px;
             overflow: hidden;
             margin: 5px;
-            border: solid 1px rgba(255,255,255,.5);
+            border: solid 1px rgba(255,255,255,.3);
             background-color: rgba(0, 0, 0, .3);
-            box-shadow: 4px 5px 5px -3px #000000;
+            box-shadow: 4px 5px 5px -3px rgba(255,255,255,.1);
           }
           .playerSearch {
             position: absolute;
@@ -25,9 +25,9 @@ function PlayerSearch({ dispatch, userName }) {
             top: 5px;
             height: 30px;
             width: 200px;
-            background-color: rgba(255,255,255,.8);
-            border: solid thin inset rgba(10,10,10,.3);
-            color: gray;
+            background-color: rgba(255,255,255,.1);
+            border: solid thin rgba(255,255,255,.1);
+            color: white;
             text-align: center;
           }
           .playerSearch-button{
@@ -59,8 +59,8 @@ function PlayerSearch({ dispatch, userName }) {
           .userName {
             display: block;
             margin: 0;
-            align-content: center;
             justify-content: center;
+            align-items: center;
             font-size: 40px;
             font-weight: 100;
             font-family: 'EB Garamond', serif;

@@ -17,7 +17,7 @@ function Background(){
           background-image: url(${background});
           background-size: cover;
           background-position: center, center;
-          opacity: .5;
+          opacity: .3;
         }
       `}</style>
     </div>

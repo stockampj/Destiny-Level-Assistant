@@ -26,9 +26,9 @@ function CharacterDisplay(props) {
           width: 300px;
           overflow: hidden;
           margin: 5px;
-          box-shadow: 4px 5px 5px -3px #000000;
-          border: solid 1px rgba(255,255,255,.5);
+          border: solid 1px rgba(255,255,255,.3);
           background-color: rgba(0, 0, 0, .3);
+          box-shadow: 4px 5px 5px -3px rgba(255,255,255,.1);
         }
         .emblem1 {
           background-image: ${bannerURL1};
