@@ -7,7 +7,7 @@ const itemStats = {
 
 const charStats = {
   lightLevel: -1,
-  charId: 1,
+  charId: -1,
   classHash: -1,
   raceHash: -1,
   emblemPath: '',

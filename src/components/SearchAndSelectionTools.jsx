@@ -4,9 +4,50 @@ import PlayerSearch from './PlayerSearch';
 import CharacterDisplay from './CharacterDisplay';
 
 function SearchAndSelectionTools({ dispatch, player, selectedCharacter}){
-  let { userName, characters } = player;
-  let charactersToDisplay;
-  if (selectedCharacter !== 0){}
+  let { userName, characters } = player;  
+
+  const updateRenderedCharacters = () => {
+    let character1 = <CharacterDisplay
+      selectedCharacter={selectedCharacter}
+      lightLevel={characters[1].lightLevel}
+      classHash={characters[1].classHash}
+      raceHash={characters[1].raceHash}
+      emblemPath= {[characters[1].emblemPath, characters[2].emblemPath, characters[3].emblemPath]}
+      characterIndex={1}
+      charId={characters[1].charId}
+      key={1}
+    />
+    let character2 = <CharacterDisplay 
+        selectedCharacter={selectedCharacter}
+        lightLevel={characters[2].lightLevel}
+        classHash={characters[2].classHash}
+        raceHash={characters[2].raceHash}
+        emblemPath= {[characters[1].emblemPath, characters[2].emblemPath, characters[3].emblemPath]}
+        characterIndex={2}
+        charId={characters[2].charId}
+        key={2}
+      />
+    let character3 = <CharacterDisplay
+      selectedCharacter={selectedCharacter} 
+      lightLevel={characters[3].lightLevel}
+      classHash={characters[3].classHash}
+      raceHash={characters[3].raceHash}
+      emblemPath= {[characters[1].emblemPath, characters[2].emblemPath, characters[3].emblemPath]}
+      characterIndex={3}
+      charId={characters[3].charId}
+      key={3}
+    />
+    let renderedCharacters=[character1,character2,character3];
+    renderedCharacters.forEach((character, index) =>{
+      if(characters[index+1].emblemPath===''){
+        renderedCharacters[index]=null;
+      }
+    });
+    return renderedCharacters;
+  }
+  let updatedRenderedCharacters=updateRenderedCharacters();
+  console.log("updated rendered characters", updatedRenderedCharacters);
+
   return (
     <div>
       <style jsx>{`
@@ -65,39 +106,10 @@ function SearchAndSelectionTools({ dispatch, player, selectedCharacter}){
         }
       `}</style>
       <div className='top-nav-row'>
-        {/* <button className='btn home-button' to='/'><i className="fas fa-beer"><span className="btn-text"> HOME</span></i></button> */}
         <div className='nav-cluster'>
-
-            <CharacterDisplay
-              selectedCharacter={selectedCharacter}
-              lightLevel={characters[1].lightLevel}
-              classHash={characters[1].classHash}
-              raceHash={characters[1].raceHash}
-              emblemPath= {[characters[1].emblemPath, characters[2].emblemPath, characters[3].emblemPath]}
-              characterIndex={1}
-              charId={characters[1].charId}
-              key={1}
-            />
-            <CharacterDisplay 
-              selectedCharacter={selectedCharacter}
-              lightLevel={characters[2].lightLevel}
-              classHash={characters[2].classHash}
-              raceHash={characters[2].raceHash}
-              emblemPath= {[characters[1].emblemPath, characters[2].emblemPath, characters[3].emblemPath]}
-              characterIndex={2}
-              charId={characters[2].charId}
-              key={2}
-            />
-            <CharacterDisplay
-              selectedCharacter={selectedCharacter} 
-              lightLevel={characters[3].lightLevel}
-              classHash={characters[3].classHash}
-              raceHash={characters[3].raceHash}
-              emblemPath= {[characters[1].emblemPath, characters[2].emblemPath, characters[3].emblemPath]}
-              characterIndex={3}
-              charId={characters[3].charId}
-              key={3}
-            />
+          {updatedRenderedCharacters[0]}
+          {updatedRenderedCharacters[1]}
+          {updatedRenderedCharacters[2]}
         </div>
         <div className='nav-cluster'>
           <PlayerSearch userName={userName}/>
