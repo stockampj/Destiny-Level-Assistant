@@ -43,5 +43,6 @@ export const initialState = {
   player: activeplayer,
   manifest: manifest,
   selectedCharacter: 0,
+  selectedTier: 0,
 };
 

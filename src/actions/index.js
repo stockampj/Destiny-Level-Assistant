@@ -1,5 +1,6 @@
 import * as types from './../constants/ActionTypes';
 import { resetSelectedPlayer } from './selectCharacter';
+import { resetSelectedTier } from './selectTier';
 
 export const changeState = (value1) => ({
   type: types.CHANGE_STATE,
@@ -16,6 +17,7 @@ const requestHeaderGET = ({
 export function fetchPlayerMembershipId(userName) {
   return function (dispatch) {
     dispatch(resetSelectedPlayer());
+    dispatch(resetSelectedTier());
     dispatch(resetPlayerGear());
     dispatch(searchForPlayer(userName));
     return fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${userName.replace(' ', '')}/`, requestHeaderGET).then(

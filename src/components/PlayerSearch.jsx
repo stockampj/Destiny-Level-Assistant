@@ -66,6 +66,18 @@ function PlayerSearch({ dispatch, userName }) {
             font-weight: 100;
             font-family: 'EB Garamond', serif;
           }
+          ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: rgba(175,175,175);
+            opacity: 1; /* Firefox */
+          }
+
+          :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: rgba(175,175,175);
+          }
+
+          ::-ms-input-placeholder { /* Microsoft Edge */
+            color: rgba(175,175,175);
+          }
       `}</style>
       <div>
         <div className='search-holder'>

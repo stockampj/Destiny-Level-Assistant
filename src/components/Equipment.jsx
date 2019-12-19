@@ -55,19 +55,32 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
         }
         .gear-bar-positive{
           position: absolute;
+
           bottom: 0px;
           left: 140px;
           height: 100%;
-          background-color: rgba(171, 250, 169,.2);
+          background-color: rgba(255, 255, 255,.3);
           overflow: hidden;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
         }
         .gear-bar-negative{
           position: absolute;
+
           bottom: 0px;
           right: 140px;
           height: 100%;
-          background-color: rgba(225, 173, 153,.2);
+          background-color: rgba(225, 173, 153,.3);
           overflow: hidden;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+        }
+        .gear-offset{
+          color: white;
+          font-size: 30px;
+          margin: 10px;
         }
         ${armorIdCSS}
       `}</style>
@@ -78,7 +91,7 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           <p className='gear-type'>{armorType}</p>
         </div>
         <div className={barClass} id={`${armorType}`}>
-
+          <p className='gear-offset'>{lightDifference}</p>
         </div>
       </div>
 

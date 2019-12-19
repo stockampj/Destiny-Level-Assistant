@@ -6,6 +6,7 @@ import BackgroundMovement from './BackgroundMovement';
 import SearchAndSelectionTools from './SearchAndSelectionTools';
 import BackgroundDistant from './BackgroundDistant';
 import EquipmentDisplay from './EquipmentDisplay';
+import TierSelector from './TierSelector';
 
 
 function App(){
@@ -16,6 +17,7 @@ function App(){
       <BackgroundMovement />
       <SearchAndSelectionTools />
       <EquipmentDisplay />
+      <TierSelector />
     </div>
   );
 }

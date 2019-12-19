@@ -60,7 +60,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
     <div>
       <style>{`
         .display-space{
-          background: rgba(0,0,0,.1);
+
           margin-top: 140px;
           display: flex;
           justify-content: center;
