@@ -1,5 +1,5 @@
 import * as types from './../constants/ActionTypes';
-import { resetSelectedPlayer } from './selectCharacter'
+import { resetSelectedPlayer } from './selectCharacter';
 
 export const changeState = (value1) => ({
   type: types.CHANGE_STATE,
@@ -29,7 +29,7 @@ export function fetchPlayerMembershipId(userName) {
         fetchPlayerProfileData(bNetId, membershipType, userName, dispatch);
       } else {
         console.log('could not find player');
-        console.log(json.Message)
+        console.log(json.Message);
       }
     });   
   };
@@ -105,9 +105,9 @@ export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, ch
 
   if (char1Id !== -1){
     return fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${bNetId}/Character/${char1Id}/?components=200,205`, requestHeaderGET)
-    .then(
-      response => response.json(),
-      error => console.log('An error occurred.', error)
+      .then(
+        response => response.json(),
+        error => console.log('An error occurred.', error)
       ).then(json => {
         if (json.Message === 'Ok'){
           json.Response.equipment.data.items.forEach(item => {
@@ -125,7 +125,7 @@ export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, ch
           raceHash1 = json.Response.character.data.raceHash;
           emblemPath1 = json.Response.character.data.emblemBackgroundPath;
           if (char2Id === -1){
-            dispatch(updateCharacterDetails(classHash1, raceHash1, emblemPath1, classHash2, raceHash2, emblemPath2, classHash3, raceHash3, emblemPath3))
+            dispatch(updateCharacterDetails(classHash1, raceHash1, emblemPath1, classHash2, raceHash2, emblemPath2, classHash3, raceHash3, emblemPath3));
             fetchEquipmentStats(bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray, dispatch);
           }
         }
@@ -151,7 +151,7 @@ export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, ch
                 raceHash2 = json.Response.character.data.raceHash;
                 emblemPath2 = json.Response.character.data.emblemBackgroundPath;
                 if (char3Id === -1){
-                  dispatch(updateCharacterDetails(classHash1, raceHash1, emblemPath1, classHash2, raceHash2, emblemPath2, classHash3, raceHash3, emblemPath3))
+                  dispatch(updateCharacterDetails(classHash1, raceHash1, emblemPath1, classHash2, raceHash2, emblemPath2, classHash3, raceHash3, emblemPath3));
                   fetchEquipmentStats(bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray, dispatch);
                 }
               }
@@ -176,7 +176,7 @@ export const fetchEquippedItems = (bNetId, membershipType, userName, char1Id, ch
                       classHash3 = json.Response.character.data.classHash;
                       raceHash3 = json.Response.character.data.raceHash;
                       emblemPath3 = json.Response.character.data.emblemBackgroundPath;
-                      dispatch(updateCharacterDetails(classHash1, raceHash1, emblemPath1, classHash2, raceHash2, emblemPath2, classHash3, raceHash3, emblemPath3))
+                      dispatch(updateCharacterDetails(classHash1, raceHash1, emblemPath1, classHash2, raceHash2, emblemPath2, classHash3, raceHash3, emblemPath3));
                       fetchEquipmentStats(bNetId, membershipType, userName, char1Id, char2Id, char3Id, equipmentArray, dispatch);
                     }
                   });
@@ -251,7 +251,7 @@ export const updateEquipmentFromAPI = (bNetId, membershipType, userName, char1Id
 
 export const resetPlayerGear = () =>({
   type: types.RESET_PLAYER_GEAR
-})
+});
 
 
 

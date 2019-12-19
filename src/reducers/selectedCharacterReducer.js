@@ -9,7 +9,7 @@ const selectedCharacterReducer = (state = initialState.selectedCharacter, action
     return newSelectedCharacterState;
   case types.CHANGE_SELECTED_PLAYER:
     newSelectedCharacterState = action.characterIndex;
-    return newSelectedCharacterState
+    return newSelectedCharacterState;
   default:
     return state;
   }

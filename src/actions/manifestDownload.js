@@ -46,4 +46,4 @@ export function fetchDestinyManifest(downloadPath, manifestVersion, dispatch){
 export const updateStoreManifest = (json) => ({
   type: types.UPDATE_STORE_MANIFEST,
   destinyManifest: json
-})
+});

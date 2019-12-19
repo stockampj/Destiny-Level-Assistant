@@ -16,17 +16,17 @@ function SearchAndSelectionTools({ dispatch, player, selectedCharacter}){
       characterIndex={1}
       charId={characters[1].charId}
       key={1}
-    />
+    />;
     let character2 = <CharacterDisplay 
-        selectedCharacter={selectedCharacter}
-        lightLevel={characters[2].lightLevel}
-        classHash={characters[2].classHash}
-        raceHash={characters[2].raceHash}
-        emblemPath= {[characters[1].emblemPath, characters[2].emblemPath, characters[3].emblemPath]}
-        characterIndex={2}
-        charId={characters[2].charId}
-        key={2}
-      />
+      selectedCharacter={selectedCharacter}
+      lightLevel={characters[2].lightLevel}
+      classHash={characters[2].classHash}
+      raceHash={characters[2].raceHash}
+      emblemPath= {[characters[1].emblemPath, characters[2].emblemPath, characters[3].emblemPath]}
+      characterIndex={2}
+      charId={characters[2].charId}
+      key={2}
+    />;
     let character3 = <CharacterDisplay
       selectedCharacter={selectedCharacter} 
       lightLevel={characters[3].lightLevel}
@@ -36,7 +36,7 @@ function SearchAndSelectionTools({ dispatch, player, selectedCharacter}){
       characterIndex={3}
       charId={characters[3].charId}
       key={3}
-    />
+    />;
     let renderedCharacters=[character1,character2,character3];
     renderedCharacters.forEach((character, index) =>{
       if(characters[index+1].emblemPath===''){
@@ -44,7 +44,7 @@ function SearchAndSelectionTools({ dispatch, player, selectedCharacter}){
       }
     });
     return renderedCharacters;
-  }
+  };
   let updatedRenderedCharacters=updateRenderedCharacters();
 
   return (

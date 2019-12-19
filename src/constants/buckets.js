@@ -30,4 +30,4 @@ export const classDefinitions = {
   2803282938: 'Awoken',
   898834093: 'Exo',
   3887404748: 'Human'
-}
+};

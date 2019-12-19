@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import constants from './../constants';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { changeSelectedPlayer } from '../actions/selectCharacter';
 const { classDefinitions } = constants;
 
@@ -13,7 +13,7 @@ function CharacterDisplay(props) {
 
   const onCharacterChange = () => {
     props.dispatch(changeSelectedPlayer(props.characterIndex));
-  }
+  };
 
   let bannerURL1=`url(https://www.bungie.net${props.emblemPath[0]}/)`;
   let bannerURL2=`url(https://www.bungie.net${props.emblemPath[1]}/)`;

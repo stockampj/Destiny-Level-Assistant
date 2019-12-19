@@ -69,22 +69,22 @@ function PlayerSearch({ dispatch, userName }) {
       `}</style>
       <div>
         <div className='search-holder'>
-              <form onSubmit={(event) => {
-                  event.preventDefault();
-                  if (!input.value.trim()) {
-                    return;
-                  }
-                  dispatch(fetchPlayerMembershipId(input.value.trim()));
-                  input.value = '';
-                }}>
-                <input className='playerSearch' placeholder="PSN XBOX or Steam UserName" ref={node => { input = node; }}></input>
-                <button className='playerSearch-button btn' type='submit' >Search</button>
-              </form>
-              <div className='name-holder'>
-                <h4 className='userName'>{userName}</h4>
-              </div>
+          <form onSubmit={(event) => {
+            event.preventDefault();
+            if (!input.value.trim()) {
+              return;
+            }
+            dispatch(fetchPlayerMembershipId(input.value.trim()));
+            input.value = '';
+          }}>
+            <input className='playerSearch' placeholder="PSN XBOX or Steam UserName" ref={node => { input = node; }}></input>
+            <button className='playerSearch-button btn' type='submit' >Search</button>
+          </form>
+          <div className='name-holder'>
+            <h4 className='userName'>{userName}</h4>
+          </div>
               
-          <button className='manifest-button btn' onClick={() => { dispatch(fetchManifestVersion())} }></button>
+          <button className='manifest-button btn' onClick={() => { dispatch(fetchManifestVersion());} }></button>
         </div>
       </div>
     </div>

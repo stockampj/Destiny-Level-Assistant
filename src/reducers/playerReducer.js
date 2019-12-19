@@ -75,7 +75,7 @@ const playerReducer = (state = initialState.player, action) => {
         }
       }
     });
-    return newPlayerState
+    return newPlayerState;
   case types.UPDATE_EQUIPMENT_FROM_API:
     let kineticWeapon = state.weapons.kinetic;
     let energyWeapon = state.weapons.energy;

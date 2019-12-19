@@ -9,14 +9,30 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
   let charArmor;
   let lightLevelAverage;
   let lightRemainder;
-  let lightReminderPercentagestring = '0%'
+  let lightReminderPercentagestring = '0%';
   let equipmentToDisplay=[];
-  let showComponentClass='hide-me'
+  let showComponentClass='hide-me';
   if(selectedCharacter !== 0){
-    let lightAverageMatrix= [];
     showComponentClass='';
+    let lightAverageMatrix= [];
+    let maxDeviation;
     charArmor = player.characters[selectedCharacter].charArmor;
-    let equipmentObject = Object.assign({}, charArmor, weapons)
+    let equipmentObject = Object.assign({}, charArmor, weapons);
+    Object.keys(equipmentObject).forEach(key=>{
+      let individualLightLevel=equipmentObject[key].itemLightLevel;
+      lightAverageMatrix.push(individualLightLevel);
+    });
+    let sum=0;
+    lightAverageMatrix.forEach((lightLevel)=>{
+      sum+=lightLevel;
+    });
+    lightLevelAverage = parseInt(sum/lightAverageMatrix.length);
+    lightRemainder = sum%lightAverageMatrix.length;
+    if(lightRemainder===0){
+      lightRemainder=8;
+    }
+    lightReminderPercentagestring = `${(lightRemainder/8)*100}%`;
+    maxDeviation=Math.abs(Math.max(...lightAverageMatrix)-lightLevelAverage)
     Object.keys(equipmentObject).forEach(key=>{
       let gear=equipmentObject[key];
       let path='';
@@ -31,21 +47,12 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
         iconPath={path}
         itemLightLevel={gear.itemLightLevel}
         lightLevelAverage={lightLevelAverage}
-      />
-      equipmentToDisplay.push(gearJSX)
-      lightAverageMatrix.push(gear.itemLightLevel)
-    })
+        maxDeviation={maxDeviation}
+      />;
+      equipmentToDisplay.push(gearJSX);
+    });
     
-      let sum=0;
-      lightAverageMatrix.forEach((lightLevel)=>{
-        sum+=lightLevel;
-      });
-      lightLevelAverage = parseInt(sum/lightAverageMatrix.length);
-      lightRemainder = sum%lightAverageMatrix.length;
-      if(lightRemainder===0){
-        lightRemainder=8;
-      }
-      lightReminderPercentagestring = `${(lightRemainder/8)*100}%`;
+    
   }
   
   
@@ -63,7 +70,6 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
           display: flex;
           flex-direction: column;
           width: 130px;
-          overflow: hidden;
           border: solid 1px rgba(255,255,255,.3);
           background-color: rgba(0, 0, 0, .3);
           box-shadow: 4px 5px 5px -3px rgba(255,255,255,.1);
@@ -100,7 +106,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
           background-color: rgba(255,255,255,.2);
         }
       `}</style>
-      <div className={`display-space`}>
+      <div className={'display-space'}>
         <div className={`equipment-holder ${showComponentClass}`}>
           <div className='light-display'>
             <p className="light-level-average">{lightLevelAverage}</p>
@@ -116,7 +122,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
           {equipmentToDisplay[7]}
         </div>
 
-        <div className={`equipment-holder`}>
+        {/* <div className={'equipment-holder'}>
           <div className='light-display'>
             <p className="light-level-average">569</p>
             <div className='light-remainder-bar'></div>
@@ -125,7 +131,8 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
             armorType={'helmet'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
             itemLightLevel={309}
-            lightLevelAverage={456}
+            lightLevelAverage={305}
+            maxDeviation={7}
           />
           <Equipment 
             armorType={'helmet'}
@@ -170,7 +177,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
             lightLevelAverage={456}
           />
           
-        </div>
+        </div> */}
       </div>
     </div>
   );

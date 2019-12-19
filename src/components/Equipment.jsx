@@ -2,8 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect} from 'react-redux';
 
-function Equipment({armorType, iconPath, itemLightLevel, lightLevelDisplay, dispatch}){
-  let lightDifference = itemLightLevel-lightLevelDisplay;
+function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxDeviation, dispatch}){
+  let lightDifference = itemLightLevel-lightLevelAverage;
+  let percentageBarNumber = Math.abs(lightDifference/5);
+  if (percentageBarNumber>1){percentageBarNumber=1};
+  percentageBarNumber= parseInt(500*percentageBarNumber)
+  let armorIdCSS = `#${armorType}{width: ${percentageBarNumber}px;}`;
+  console.log(maxDeviation, itemLightLevel, lightLevelAverage, lightDifference);
+  let barClass = (lightDifference>=0) ? 'gear-bar-positive' : 'gear-bar-negative';
+
   return (
     <div>
       <style>{`
@@ -46,13 +53,32 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelDisplay, disp
           margin-top: -8px;
           color: rgba(225, 224, 186, 1);
         }
-      
+        .gear-bar-positive{
+          position: absolute;
+          bottom: 0px;
+          left: 140px;
+          height: 100%;
+          background-color: rgba(171, 250, 169,.2);
+          overflow: hidden;
+        }
+        .gear-bar-negative{
+          position: absolute;
+          bottom: 0px;
+          right: 140px;
+          height: 100%;
+          background-color: rgba(225, 173, 153,.2);
+          overflow: hidden;
+        }
+        ${armorIdCSS}
       `}</style>
       <div className='individual-equipment-holder'>
         <img className='gear-icon' src={iconPath} alt=""/>
         <div className='gear-type-holder'>
           <p className="gear-light-level">{itemLightLevel}</p>
           <p className='gear-type'>{armorType}</p>
+        </div>
+        <div className={barClass} id={`${armorType}`}>
+
         </div>
       </div>
 

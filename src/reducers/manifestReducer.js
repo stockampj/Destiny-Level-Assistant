@@ -12,8 +12,8 @@ const manifestReducer = (state = initialState.manifest, action) => {
   case types.UPDATE_STORE_MANIFEST:
     newManifestState = {
       manifest: action.destinyManifest
-    }
-    return newManifestState
+    };
+    return newManifestState;
   default:
     return state;
   }
