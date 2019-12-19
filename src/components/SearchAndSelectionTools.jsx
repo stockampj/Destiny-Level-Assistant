@@ -46,11 +46,10 @@ function SearchAndSelectionTools({ dispatch, player, selectedCharacter}){
     return renderedCharacters;
   }
   let updatedRenderedCharacters=updateRenderedCharacters();
-  console.log("updated rendered characters", updatedRenderedCharacters);
 
   return (
     <div>
-      <style jsx>{`
+      <style>{`
         .top-nav-row {
           position: fixed;
           top: 0px;

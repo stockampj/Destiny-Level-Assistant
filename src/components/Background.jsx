@@ -5,7 +5,7 @@ import BackgroundMovement from './BackgroundMovement';
 function Background(){
   return(
     <div className="app-background">
-      <style jsx>{`
+      <style>{`
         .app-background{
           position: fixed;
           z-index: -2;

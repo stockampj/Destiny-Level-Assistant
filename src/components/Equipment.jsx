@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect} from 'react-redux';
 
-function Equipment({armorType, iconPath, itemLightLevel, dispatch}){
-  console.log(iconPath);
+function Equipment({armorType, iconPath, itemLightLevel, lightLevelDisplay, dispatch}){
+  let lightDifference = itemLightLevel-lightLevelDisplay;
   return (
     <div>
       <style>{`

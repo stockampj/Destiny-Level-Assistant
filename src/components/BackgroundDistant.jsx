@@ -5,7 +5,7 @@ import React from 'react';
 function BackgroundDistant(){
   return(
     <div className="app-background-distant">
-      <style jsx>{`
+      <style>{`
         .app-background-distant{
           position: fixed;
           z-index: -3;

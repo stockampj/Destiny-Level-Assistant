@@ -16,6 +16,7 @@ const requestHeaderGET = ({
 export function fetchPlayerMembershipId(userName) {
   return function (dispatch) {
     dispatch(resetSelectedPlayer());
+    dispatch(resetPlayerGear());
     dispatch(searchForPlayer(userName));
     return fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${userName.replace(' ', '')}/`, requestHeaderGET).then(
       response => response.json(),
@@ -247,6 +248,10 @@ export const updateEquipmentFromAPI = (bNetId, membershipType, userName, char1Id
   char3Id,
   equipmentArray
 });
+
+export const resetPlayerGear = () =>({
+  type: types.RESET_PLAYER_GEAR
+})
 
 
 

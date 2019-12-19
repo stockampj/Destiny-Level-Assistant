@@ -4,7 +4,7 @@ import backgroundMovement from '../media/images/mapLines.png';
 function BackgroundMovement(){
   return(
     <div className="app-background-movement">
-      <style jsx>{`
+      <style>{`
         .app-background-movement{
           position: fixed;
           z-index: -1;

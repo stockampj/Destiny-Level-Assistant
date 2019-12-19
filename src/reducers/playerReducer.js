@@ -10,6 +10,9 @@ const playerReducer = (state = initialState.player, action) => {
       isFetching: true
     });
     return newPlayerState;
+  case types.RESET_PLAYER_GEAR:
+    newPlayerState=initialState.player;
+    return newPlayerState;
   case types.UPDATE_PLAYER_CHARACTERS:
     newPlayerState = Object.assign({}, state, {
       userName: action.userName,
