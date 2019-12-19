@@ -63,16 +63,7 @@ function SearchAndSelectionTools({ dispatch, player, selectedCharacter}){
           z-index: 1;
           color: white;
         }
-         
-        .home-button:hover {
-          background: rgba(255,255,255, .1);
-          color:  rgba(255,255,255,1);
-          border-right: solid 1px rgba(255, 255, 255, 0.2);
-        }
-        
-        .fas {
-          font-size: 1.5em;
-        }
+
         .btn-text {
           {/* font-family: 'UnifrakturCook', cursive; */}
         }
@@ -94,6 +85,9 @@ function SearchAndSelectionTools({ dispatch, player, selectedCharacter}){
         body {
           font-family: 'Bebas Neue', cursive;
           
+        }
+        p{
+          margin: 0px;
         }
       `}</style>
       <div className='top-nav-row'>

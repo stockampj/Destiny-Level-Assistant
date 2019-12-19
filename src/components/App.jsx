@@ -16,7 +16,6 @@ function App(){
       <BackgroundMovement />
       <SearchAndSelectionTools />
       <EquipmentDisplay />
-      {/* <Player /> */}
     </div>
   );
 }
