@@ -63,15 +63,6 @@ function SearchAndSelectionTools({ dispatch, player, selectedCharacter}){
           z-index: 1;
           color: white;
         }
-        
-        .home-button {
-          border-radius: 0%;
-          font-weight: 800;
-          height: 40px;
-          color:  rgba(255,255,255,.8);
-          text-shadow: 1px 1px 3px rgba(0,0,0,0.8);    
-          border: none;
-        }
          
         .home-button:hover {
           background: rgba(255,255,255, .1);

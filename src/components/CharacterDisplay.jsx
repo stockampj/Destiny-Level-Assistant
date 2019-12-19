@@ -7,8 +7,6 @@ const { classDefinitions } = constants;
 
 function CharacterDisplay(props) {
   let isCurrentlySelected = false;
-  console.log("selected Character",props.selectedCharacter)
-  console.log("characterIndex",props.characterIndex)
   if (props.selectedCharacter == props.characterIndex){
     isCurrentlySelected= true;
   }
@@ -38,7 +36,8 @@ function CharacterDisplay(props) {
           height: 100px;
           width: 300px;
           overflow: hidden;
-          margin: 5px;
+          margin-left: 8px;
+          margin-top: 5px;
           border: solid 1px rgba(255,255,255,.3);
           background-color: rgba(0, 0, 0, .3);
           box-shadow: 4px 5px 5px -3px rgba(255,255,255,.1);

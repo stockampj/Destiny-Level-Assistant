@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchPlayerMembershipId } from './../actions';
 import PropTypes from 'prop-types';
 import { fetchManifestVersion } from '../actions/manifestDownload';
+import { resetSelectedPlayer } from '../actions/selectCharacter';
 
 function PlayerSearch({ dispatch, userName }) {
   let input;
@@ -83,7 +84,7 @@ function PlayerSearch({ dispatch, userName }) {
                 <h4 className='userName'>{userName}</h4>
               </div>
               
-          <button className='manifest-button btn' onClick={() => { dispatch(fetchManifestVersion()); }}></button>
+          <button className='manifest-button btn' onClick={() => { dispatch(fetchManifestVersion())} }></button>
         </div>
       </div>
     </div>

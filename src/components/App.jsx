@@ -5,6 +5,7 @@ import Background from './Background';
 import BackgroundMovement from './BackgroundMovement';
 import SearchAndSelectionTools from './SearchAndSelectionTools';
 import BackgroundDistant from './BackgroundDistant';
+import EquipmentDisplay from './EquipmentDisplay';
 
 
 function App(){
@@ -14,7 +15,8 @@ function App(){
       <Background />
       <BackgroundMovement />
       <SearchAndSelectionTools />
-      <Player />
+      <EquipmentDisplay />
+      {/* <Player /> */}
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import * as types from './../constants/ActionTypes';
+import { resetSelectedPlayer } from './selectCharacter'
 
 export const changeState = (value1) => ({
   type: types.CHANGE_STATE,
@@ -14,6 +15,7 @@ const requestHeaderGET = ({
 
 export function fetchPlayerMembershipId(userName) {
   return function (dispatch) {
+    dispatch(resetSelectedPlayer());
     dispatch(searchForPlayer(userName));
     return fetch(`https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/${userName.replace(' ', '')}/`, requestHeaderGET).then(
       response => response.json(),
@@ -38,7 +40,6 @@ export const searchForPlayer = (userName) => ({
 });
 
 export const fetchPlayerProfileData = (bNetId, membershipType, userName, dispatch) => {
-
   return fetch(`https://www.bungie.net/Platform/Destiny2/${membershipType}/Profile/${bNetId}/?components=100`, requestHeaderGET).then(
     response => response.json(),
     error => console.log('An error occurred.', error)
