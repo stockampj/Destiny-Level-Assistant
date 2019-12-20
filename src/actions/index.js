@@ -10,7 +10,7 @@ export const changeState = (value1) => ({
 const apiKey = process.env.apiKey;
 const requestHeaderGET = ({
   headers: {
-    'x-api-key': `${apiKey}`
+    'x-api-key': 'bd67d9ad9aca4084a9794f755888ae6c'
   }
 });
 
