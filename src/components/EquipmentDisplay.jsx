@@ -60,8 +60,9 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
     <div>
       <style>{`
         .display-space{
-
-          margin-top: 140px;
+          margin-top: -10px;
+          margin-left: -5px;
+          padding-top: 140px;
           display: flex;
           justify-content: center;
           align-items: center;

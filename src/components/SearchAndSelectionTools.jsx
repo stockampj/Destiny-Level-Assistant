@@ -61,6 +61,7 @@ function SearchAndSelectionTools({ dispatch, player, selectedCharacter}){
           overflow: hidden;
           z-index: 1;
           color: white;
+          padding: 10px;
         }
 
         .btn-text {
@@ -71,6 +72,7 @@ function SearchAndSelectionTools({ dispatch, player, selectedCharacter}){
           display: flex;
           flex-flow: row nowrap;
           justify-content: flex-end;
+          margin-right:20px;
         }
         .nav-item {
           color: rgba(255,255,255,.8);
@@ -83,7 +85,7 @@ function SearchAndSelectionTools({ dispatch, player, selectedCharacter}){
         }
         body {
           font-family: 'Bebas Neue', cursive;
-          
+          margin: 0px;          
         }
         p{
           margin: 0px;

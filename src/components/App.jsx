@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Player from './Player';
 import Background from './Background';
 import BackgroundMovement from './BackgroundMovement';
 import SearchAndSelectionTools from './SearchAndSelectionTools';
@@ -17,7 +15,7 @@ function App(){
       <BackgroundMovement />
       <SearchAndSelectionTools />
       <EquipmentDisplay />
-      <TierSelector />
+      {/* <TierSelector /> */}
     </div>
   );
 }
