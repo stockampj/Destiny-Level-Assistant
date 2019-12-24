@@ -254,8 +254,3 @@ export const updateEquipmentFromAPI = (bNetId, membershipType, userName, char1Id
 export const resetPlayerGear = () =>({
   type: types.RESET_PLAYER_GEAR
 });
-
-
-
-
-
