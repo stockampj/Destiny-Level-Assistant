@@ -13,27 +13,23 @@ function TierSelector({ dispatch, selectedTier}){
           height: 110px;
           width: 100%;
           display: flex;
-          justify-content: space-between;
+          justify-content: space-around;
           overflow: hidden;
           z-index: 1;
           color: white;
         }
+        .bottom-nav-cluster{
+          border: solid thin white;
+          margin: 0px;
+          height: 50px;
+          width: 200px;
+        }
       `}</style>
       <div className='bottom-nav-row'>
-        <div className='bottom-nav-cluster'>
-          <div>
-            <h1>TIER 1</h1>
-          </div>
-          <div>
-            <h1>TIER 2</h1>
-          </div>
-          <div>
-            <h1>TIER 3</h1>
-          </div>
-          <div>
-            <h1>Pinnacle</h1>
-          </div>
-        </div>
+            <h1 className='bottom-nav-cluster'>TIER 1</h1>
+            <h1 className='bottom-nav-cluster'>TIER 2</h1>
+            <h1 className='bottom-nav-cluster'>TIER 3</h1>
+            <h1 className='bottom-nav-cluster'>Pinnacle</h1>
       </div>
     </div>
   );

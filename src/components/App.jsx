@@ -15,7 +15,7 @@ function App(){
       <BackgroundMovement />
       <SearchAndSelectionTools />
       <EquipmentDisplay />
-      {/* <TierSelector /> */}
+      <TierSelector />
     </div>
   );
 }
