@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function TierButton (props){
   console.log(props)
   return (
-    <div className='bottom-nav-cluster'>
+    <div className='bottom-nav-cluster' onClick={()=>{props.onTierSelection(props.index);}}>
       <style>{`
           .bottom-nav-cluster{
             border: solid thin white;
@@ -16,12 +16,13 @@ function TierButton (props){
             background-color: darkred;
             justify-content: center;
             align-items: center;
+            margin: 20px;
           }
           .tier-name{
             font-size: 2em;
           }
       `}</style>
-      <p className='tier-name' onClick={()=>{props.onTierSelection(props.index);}}>{props.tierName}</p>
+      <p className='tier-name'>{props.tierName}</p>
     </div>
   )
 }

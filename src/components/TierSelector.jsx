@@ -18,10 +18,11 @@ function TierSelector({ dispatch, selectedTier}){
           position: fixed;
           bottom: 0px;
           left: 0px;
-          height: 110px;
+          height: 75px;
           width: 100%;
           display: flex;
           justify-content: space-around;
+          align-items: flex-end;
           overflow: hidden;
           z-index: 1;
           color: white;
