@@ -8,7 +8,7 @@ const { classDefinitions } = constants;
 function CharacterDisplay(props) {
   let isCurrentlySelected = false;
   if (props.selectedCharacter == props.characterIndex){
-    isCurrentlySelected= true;
+    isCurrentlySelected = true;
   }
 
   const onCharacterChange = () => {
@@ -64,8 +64,6 @@ function CharacterDisplay(props) {
           flex-direction: column;
           height: 100%;
           width: 70%;
-
-          
         }
         .characterClass {
           margin: 5px;

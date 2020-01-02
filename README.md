@@ -12,8 +12,7 @@ _This app is still in development. The purpose of this application is help playe
 
 
 * #### API Call to Bungie.net
-| Spec                      |Input          | Output |
-|:|:|:|
+|: Spec |: Input|: Output|
 |Web-app that will make an api call to retrieve the character's current stats |Robot Chickens| X-box live profile with 3 characters and 8 gear slots|
 |App will pull completed activities, and return a list of activities currently available to character. |Robot Chickens | Recommendation: character can pursue the following 3 activities to maximize their character level gains|
 

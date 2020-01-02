@@ -1,8 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import constants from './../constants';
+import { changeSelectedTier } from '../actions/selectTier';
+import TierButton from './TierButton';
+const { types } = constants;
 
 function TierSelector({ dispatch, selectedTier}){ 
 
+  const handleTierSelection = (index) => {
+    console.log("TIER SELECTOR: ", index)
+    dispatch(changeSelectedTier(index))
+  } 
   return (
     <div>
       <style>{`
@@ -18,18 +26,28 @@ function TierSelector({ dispatch, selectedTier}){
           z-index: 1;
           color: white;
         }
-        .bottom-nav-cluster{
-          border: solid thin white;
-          margin: 0px;
-          height: 50px;
-          width: 200px;
-        }
       `}</style>
       <div className='bottom-nav-row'>
-            <h1 className='bottom-nav-cluster'>TIER 1</h1>
-            <h1 className='bottom-nav-cluster'>TIER 2</h1>
-            <h1 className='bottom-nav-cluster'>TIER 3</h1>
-            <h1 className='bottom-nav-cluster'>Pinnacle</h1>
+          <TierButton 
+            tierName='Tier 1'
+            index='1'
+            onTierSelection = {handleTierSelection}   
+          />
+          <TierButton 
+            tierName='Tier 2'
+            index='2'
+            onTierSelection = {handleTierSelection}   
+          />
+          <TierButton 
+            tierName='Tier 3'
+            index='3'
+            onTierSelection = {handleTierSelection}
+          />
+          <TierButton 
+            tierName='Pinnacle'
+            index='4'
+            onTierSelection = {handleTierSelection}
+          />
       </div>
     </div>
   );

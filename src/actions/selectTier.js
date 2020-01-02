@@ -4,7 +4,7 @@ export const resetSelectedTier = () => ({
   type: types.RESET_SELECTED_TIER,
 });
 
-export const changeSelectedPTier = (tierIndex) => ({
+export const changeSelectedTier = (tierIndex) => ({
   type: types.CHANGE_SELECTED_TIER,
   tierIndex
 });
