@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function TierButton (props){
-  console.log(props)
   return (
     <div className='bottom-nav-cluster' onClick={()=>{props.onTierSelection(props.index);}}>
       <style>{`

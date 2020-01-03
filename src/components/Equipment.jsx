@@ -3,13 +3,55 @@ import PropTypes from 'prop-types';
 import { connect} from 'react-redux';
 
 function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxDeviation, dispatch}){
+  
+  let maxBarWidth = 540;
+  let barDivisions = 6;
+  let pixelOffset = 10;
+
   let lightDifference = itemLightLevel-lightLevelAverage;
-  let percentageBarNumber = Math.abs(lightDifference/5);
-  if (percentageBarNumber>1){percentageBarNumber=1};
-  percentageBarNumber= parseInt(500*percentageBarNumber)
-  let armorIdCSS = `#${armorType}{width: ${percentageBarNumber}px;}`;
-  console.log(maxDeviation, itemLightLevel, lightLevelAverage, lightDifference);
+  let lightDifferenceString = (lightDifference>=0) ? `+${lightDifference}` : `${lightDifference}`;
   let barClass = (lightDifference>=0) ? 'gear-bar-positive' : 'gear-bar-negative';
+  let percentageBarNumber = (Math.abs(lightDifference/5)>1) ? 1 : Math.abs(lightDifference/barDivisions);
+  percentageBarNumber= parseInt(maxBarWidth*percentageBarNumber)
+  let armorBaseLightCSS = `#${armorType}{width: ${percentageBarNumber}px;}`;
+  console.log(maxDeviation, itemLightLevel, lightLevelAverage, lightDifference);
+  
+  let tierModifier = 2;
+  let adjustedModifierNumber;
+  if ((tierModifier<=lightDifference)&&(lightDifference>0)){
+    adjustedModifierNumber = 0;
+  } else if ((tierModifier>lightDifference)&&(lightDifference>0)) {
+    adjustedModifierNumber = tierModifier - lightDifference;
+  } else {
+    adjustedModifierNumber= tierModifier;
+  }
+
+  if (lightDifference<=0){
+    pixelOffset= 0;
+    console.log('hello')
+  }
+
+  let modifierBarNumber = (tierModifier == 0) ? 0 : ((adjustedModifierNumber*(maxBarWidth/barDivisions))-pixelOffset);
+  let armorModifierCSS = `#${armorType}-modifier{width: ${modifierBarNumber}px; margin-left: ${pixelOffset}px;}`;
+
+  let positiveBarContentBase= null;
+  let negativeBarContentBase= null;
+  let modifierBarContent= null;
+
+  if (lightDifference>=0){
+    positiveBarContentBase= <div className='light-level-bar' id={`${armorType}`}>
+       <p className='gear-offset'>{lightDifferenceString}</p>
+    </div>
+  } else {
+    negativeBarContentBase = <div className='light-level-bar' id={`${armorType}`}>
+      <p className='gear-offset'>{lightDifferenceString}</p>
+    </div>
+  }
+  if (tierModifier !== 0) {
+    modifierBarContent = <div className='modifier-bar' id={`${armorType}-modifier`}>
+
+    </div>
+  }
 
   return (
     <div>
@@ -53,36 +95,48 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           margin-top: -8px;
           color: rgba(225, 224, 186, 1);
         }
-        .gear-bar-positive{
+        .bar-display-holder-positive{
           position: absolute;
 
           bottom: 0px;
           left: 140px;
           height: 100%;
-          background-color: rgba(255, 255, 255,.3);
           overflow: hidden;
           display: flex;
-          justify-content: flex-end;
+          justify-content: flex-start;
           align-items: center;
         }
-        .gear-bar-negative{
+        .bar-display-holder-negative{
           position: absolute;
 
           bottom: 0px;
           right: 140px;
           height: 100%;
-          background-color: rgba(225, 173, 153,.3);
           overflow: hidden;
           display: flex;
-          justify-content: flex-start;
+          justify-content: flex-end;
           align-items: center;
+          width: 540px;
         }
         .gear-offset{
           color: white;
           font-size: 30px;
           margin: 10px;
         }
-        ${armorIdCSS}
+        ${armorBaseLightCSS}
+        ${armorModifierCSS}
+
+        .light-level-bar{
+          height: 100%;
+          background-color: rgba(255, 255, 255,.3);
+        }
+        .modifier-bar{
+          height: 100%;
+          background-color: rgba(128, 198, 120,.3);
+        }
+        .bar-display-holder-negative div{
+          background-color: rgba(225, 173, 153,.3);
+        }
       `}</style>
       <div className='individual-equipment-holder'>
         <img className='gear-icon' src={iconPath} alt=""/>
@@ -90,8 +144,15 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           <p className="gear-light-level">{itemLightLevel}</p>
           <p className='gear-type'>{armorType}</p>
         </div>
-        <div className={barClass} id={`${armorType}`}>
-          <p className='gear-offset'>{lightDifference}</p>
+        <div className='bar-display-holder-positive'>
+          {positiveBarContentBase}
+          <div className='modifier-bar' id={`${armorType}-modifier`}></div>
+        </div>
+        <div className='bar-display-holder-negative'>
+          {negativeBarContentBase}
+        </div>
+        <div className={barClass} >
+
         </div>
       </div>
 

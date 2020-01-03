@@ -123,62 +123,69 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
           {equipmentToDisplay[7]}
         </div>
 
-        {/* <div className={'equipment-holder'}>
+        <div className={'equipment-holder'}>
           <div className='light-display'>
-            <p className="light-level-average">569</p>
+            <p className="light-level-average">456</p>
             <div className='light-remainder-bar'></div>
           </div>
           <Equipment 
             armorType={'helmet'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
-            lightLevelAverage={305}
+            itemLightLevel={460}
+            lightLevelAverage={456}
             maxDeviation={7}
           />
           <Equipment 
-            armorType={'helmet'}
+            armorType={'arms'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
+            itemLightLevel={450}
             lightLevelAverage={456}
+            maxDeviation={7}
           />
           <Equipment 
-            armorType={'helmet'}
+            armorType={'chest'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
+            itemLightLevel={460}
             lightLevelAverage={456}
+            maxDeviation={7}
           />
           <Equipment 
-            armorType={'helmet'}
+            armorType={'legs'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
+            itemLightLevel={452}
             lightLevelAverage={456}
+            maxDeviation={7}
           />
           <Equipment 
-            armorType={'helmet'}
+            armorType={'class'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
+            itemLightLevel={453}
             lightLevelAverage={456}
+            maxDeviation={7}
           />
           <Equipment 
-            armorType={'helmet'}
+            armorType={'primary'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
+            itemLightLevel={457}
             lightLevelAverage={456}
+            maxDeviation={7}
           />
           <Equipment 
-            armorType={'helmet'}
+            armorType={'secondary'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
+            itemLightLevel={459}
             lightLevelAverage={456}
+            maxDeviation={7}
           />
           <Equipment 
-            armorType={'helmet'}
+            armorType={'power'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
+            itemLightLevel={456}
             lightLevelAverage={456}
+            maxDeviation={7}
           />
           
-        </div> */}
+        </div>
       </div>
     </div>
   );
