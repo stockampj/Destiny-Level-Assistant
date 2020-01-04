@@ -4,7 +4,7 @@ import { fetchPlayerMembershipId } from './../actions';
 import PropTypes from 'prop-types';
 import Equipment from './Equipment';
 
-function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
+function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selectedTier }) {
   let weapons = player.weapons;
   let charArmor;
   let lightLevelAverage;
@@ -48,12 +48,14 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
         itemLightLevel={gear.itemLightLevel}
         lightLevelAverage={lightLevelAverage}
         maxDeviation={maxDeviation}
+        selectedTier = {selectedTier}
       />;
       equipmentToDisplay.push(gearJSX);
     });
-    
-    
   }
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'+ selectedTier)
+  let equipmentHolderAlignment = (selectedTier === 0) ? 'center' : 'flex-start';
+  console.log(equipmentHolderAlignment);
   
   
   return (
@@ -64,8 +66,10 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
           margin-left: -5px;
           padding-top: 140px;
           display: flex;
-          justify-content: center;
+          justify-content: ${equipmentHolderAlignment};
           align-items: center;
+          margin-left: 20px;
+          margin-right: 20px;
         }
         .equipment-holder {
           display: flex;
@@ -123,6 +127,8 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
           {equipmentToDisplay[7]}
         </div>
 
+
+
         <div className={'equipment-holder'}>
           <div className='light-display'>
             <p className="light-level-average">456</p>
@@ -134,6 +140,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
             itemLightLevel={460}
             lightLevelAverage={456}
             maxDeviation={7}
+            selectedTier = {selectedTier}
           />
           <Equipment 
             armorType={'arms'}
@@ -141,6 +148,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
             itemLightLevel={450}
             lightLevelAverage={456}
             maxDeviation={7}
+            selectedTier = {selectedTier}
           />
           <Equipment 
             armorType={'chest'}
@@ -148,6 +156,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
             itemLightLevel={460}
             lightLevelAverage={456}
             maxDeviation={7}
+            selectedTier = {selectedTier}
           />
           <Equipment 
             armorType={'legs'}
@@ -155,6 +164,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
             itemLightLevel={452}
             lightLevelAverage={456}
             maxDeviation={7}
+            selectedTier = {selectedTier}
           />
           <Equipment 
             armorType={'class'}
@@ -162,6 +172,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
             itemLightLevel={453}
             lightLevelAverage={456}
             maxDeviation={7}
+            selectedTier = {selectedTier}
           />
           <Equipment 
             armorType={'primary'}
@@ -169,6 +180,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
             itemLightLevel={457}
             lightLevelAverage={456}
             maxDeviation={7}
+            selectedTier = {selectedTier}
           />
           <Equipment 
             armorType={'secondary'}
@@ -176,6 +188,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
             itemLightLevel={459}
             lightLevelAverage={456}
             maxDeviation={7}
+            selectedTier = {selectedTier}
           />
           <Equipment 
             armorType={'power'}
@@ -183,9 +196,12 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
             itemLightLevel={456}
             lightLevelAverage={456}
             maxDeviation={7}
-          />
-          
+            selectedTier = {selectedTier}
+          />  
         </div>
+
+
+
       </div>
     </div>
   );
@@ -199,7 +215,8 @@ const mapStateToProps = state => {
   return {
     player: state.player,
     selectedCharacter: state.selectedCharacter,
-    manifest: state.manifest
+    manifest: state.manifest,
+    selectedTier: state.selectedTier
   };
 };
 

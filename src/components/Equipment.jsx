@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect} from 'react-redux';
 
-function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxDeviation, dispatch}){
+function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxDeviation, selectedTier, dispatch}){
   
   let maxBarWidth = 540;
   let barDivisions = 6;
-  let pixelOffset = 10;
+  let pixelOffset = 2;
 
   let lightDifference = itemLightLevel-lightLevelAverage;
   let lightDifferenceString = (lightDifference>=0) ? `+${lightDifference}` : `${lightDifference}`;
@@ -16,7 +16,7 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
   let armorBaseLightCSS = `#${armorType}{width: ${percentageBarNumber}px;}`;
   console.log(maxDeviation, itemLightLevel, lightLevelAverage, lightDifference);
   
-  let tierModifier = 2;
+  let tierModifier = selectedTier;
   let adjustedModifierNumber;
   if ((tierModifier<=lightDifference)&&(lightDifference>0)){
     adjustedModifierNumber = 0;
@@ -38,10 +38,16 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
   let negativeBarContentBase= null;
   let modifierBarContent= null;
 
-  if (lightDifference>=0){
+  if ((lightDifference>=0)&&(tierModifier===0)){
     positiveBarContentBase= <div className='light-level-bar' id={`${armorType}`}>
        <p className='gear-offset'>{lightDifferenceString}</p>
     </div>
+  } else if(lightDifference>=0){
+        positiveBarContentBase= <div className='light-level-bar' id={`${armorType}`}>
+       <p className='gear-offset'>{lightDifferenceString}</p>
+    </div>
+  }else if (tierModifier !== 0){
+    negativeBarContentBase = null;
   } else {
     negativeBarContentBase = <div className='light-level-bar' id={`${armorType}`}>
       <p className='gear-offset'>{lightDifferenceString}</p>
@@ -146,7 +152,7 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
         </div>
         <div className='bar-display-holder-positive'>
           {positiveBarContentBase}
-          <div className='modifier-bar' id={`${armorType}-modifier`}></div>
+          {modifierBarContent}
         </div>
         <div className='bar-display-holder-negative'>
           {negativeBarContentBase}
