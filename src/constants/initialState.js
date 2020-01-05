@@ -44,5 +44,8 @@ export const initialState = {
   manifest: manifest,
   selectedCharacter: 0,
   selectedTier: 0,
+  previousState: {
+    selectedTier: 0,
+  }
 };
 

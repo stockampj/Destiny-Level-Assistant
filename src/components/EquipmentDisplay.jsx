@@ -4,7 +4,8 @@ import { fetchPlayerMembershipId } from './../actions';
 import PropTypes from 'prop-types';
 import Equipment from './Equipment';
 
-function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
+function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selectedTier, previousState }) {
+  
   let weapons = player.weapons;
   let charArmor;
   let lightLevelAverage;
@@ -48,11 +49,15 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
         itemLightLevel={gear.itemLightLevel}
         lightLevelAverage={lightLevelAverage}
         maxDeviation={maxDeviation}
+        selectedTier = {selectedTier}
       />;
       equipmentToDisplay.push(gearJSX);
     });
-    
-    
+  }
+
+  let equipmentHolderClass = 'equipment-holder';
+  if (selectedTier!==0){
+    equipmentHolderClass = 'equipment-holder is-tier-selected-class';
   }
   
   
@@ -64,7 +69,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
           margin-left: -5px;
           padding-top: 140px;
           display: flex;
-          justify-content: center;
+          justify-content: flex-start;
           align-items: center;
         }
         .equipment-holder {
@@ -77,7 +82,13 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
           color: white;
           position:relative;
           padding: 5px;
+          margin-left: 45%;
+          transition: margin-left 1s;
         }
+        .is-tier-selected-class{
+          margin-left: 25%;
+        }
+
         .hide-me{
           display: none;
         }
@@ -123,62 +134,81 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest }) {
           {equipmentToDisplay[7]}
         </div>
 
-        {/* <div className={'equipment-holder'}>
+
+
+        <div className={equipmentHolderClass}>
           <div className='light-display'>
-            <p className="light-level-average">569</p>
+            <p className="light-level-average">456</p>
             <div className='light-remainder-bar'></div>
           </div>
           <Equipment 
             armorType={'helmet'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
-            lightLevelAverage={305}
+            itemLightLevel={460}
+            lightLevelAverage={456}
             maxDeviation={7}
+            selectedTier = {selectedTier}
           />
           <Equipment 
-            armorType={'helmet'}
+            armorType={'arms'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
+            itemLightLevel={450}
             lightLevelAverage={456}
+            maxDeviation={7}
+            selectedTier = {selectedTier}
           />
           <Equipment 
-            armorType={'helmet'}
+            armorType={'chest'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
+            itemLightLevel={460}
             lightLevelAverage={456}
+            maxDeviation={7}
+            selectedTier = {selectedTier}
           />
           <Equipment 
-            armorType={'helmet'}
+            armorType={'legs'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
+            itemLightLevel={452}
             lightLevelAverage={456}
+            maxDeviation={7}
+            selectedTier = {selectedTier}
           />
           <Equipment 
-            armorType={'helmet'}
+            armorType={'class'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
+            itemLightLevel={453}
             lightLevelAverage={456}
+            maxDeviation={7}
+            selectedTier = {selectedTier}
           />
           <Equipment 
-            armorType={'helmet'}
+            armorType={'primary'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
+            itemLightLevel={457}
             lightLevelAverage={456}
+            maxDeviation={7}
+            selectedTier = {selectedTier}
           />
           <Equipment 
-            armorType={'helmet'}
+            armorType={'secondary'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
+            itemLightLevel={459}
             lightLevelAverage={456}
+            maxDeviation={7}
+            selectedTier = {selectedTier}
           />
           <Equipment 
-            armorType={'helmet'}
+            armorType={'power'}
             iconPath={'https://www.bungie.net/common/destiny2_content/icons/b8025a8d16086b3c5b5b34c9c1a7c299.jpg/'}
-            itemLightLevel={309}
+            itemLightLevel={456}
             lightLevelAverage={456}
-          />
-          
-        </div> */}
+            maxDeviation={7}
+            selectedTier = {selectedTier}
+          />  
+        </div>
+
+
+
       </div>
     </div>
   );
@@ -192,7 +222,9 @@ const mapStateToProps = state => {
   return {
     player: state.player,
     selectedCharacter: state.selectedCharacter,
-    manifest: state.manifest
+    manifest: state.manifest,
+    selectedTier: state.selectedTier,
+    previousState: state.previousState
   };
 };
 
