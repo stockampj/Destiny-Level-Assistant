@@ -83,7 +83,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
           position:relative;
           padding: 5px;
           margin-left: 45%;
-          transition: margin-left .5s;
+          transition: margin-left 1s;
         }
         .is-tier-selected-class{
           margin-left: 25%;

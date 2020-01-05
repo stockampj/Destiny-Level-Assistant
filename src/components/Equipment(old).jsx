@@ -7,36 +7,55 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
   let maxBarWidth = 540;
   let barDivisions = 6;
   let pixelOffset = 2;
-  let tierModifier = selectedTier;
-  let baseBarSize = () => {
-    console.log('hello')
-    let width = 0;
-    let lightDelta = itemLightLevel-lightLevelAverage;
-    if (selectedTier === 0){
-      width = Math.abs(lightDelta);
-    } else {
-      width = tierModifier-lightDelta;
-      if (width<0){width=0};
-    }
-    console.log(width);
-    return width;
-  }
-  baseBarSize();
-  let lightDifference = itemLightLevel-lightLevelAverage;
 
+  let lightDifference = itemLightLevel-lightLevelAverage;
   let lightDifferenceString = (lightDifference>=0) ? `+${lightDifference}` : `${lightDifference}`;
   let barClass = (lightDifference>=0) ? 'gear-bar-positive' : 'gear-bar-negative';
-  let percentageBarNumber = (Math.abs(baseBarSize()/barDivisions)>1) ? 1 : Math.abs(baseBarSize()/barDivisions);
+  let percentageBarNumber = (Math.abs(lightDifference/5)>1) ? 1 : Math.abs(lightDifference/barDivisions);
   percentageBarNumber= parseInt(maxBarWidth*percentageBarNumber)
-  console.log(percentageBarNumber);
-  let armorBaseLightCSS = `#${armorType}{width: ${percentageBarNumber}px;transition: width .5s;}`;
-  let positiveBarContentBase= <div className='light-level-bar' id={`${armorType}`}></div>;
+  let armorBaseLightCSS = (selectedTier===0) ? (`#${armorType}{width: ${percentageBarNumber}px;}`) : (`#${armorType}{width: 0px;}`);
+
+  let tierModifier = selectedTier;
+  let adjustedModifierNumber;
+  if ((tierModifier<=lightDifference)&&(lightDifference>0)){
+    adjustedModifierNumber = 0;
+  } else if ((tierModifier>lightDifference)&&(lightDifference>0)) {
+    adjustedModifierNumber = tierModifier - lightDifference;
+  } else {
+    adjustedModifierNumber= tierModifier;
+  }
 
   if (lightDifference<=0){
     pixelOffset= 0;
   }
-  let barHolderClass='bar-display-holder';
-  if ((lightDifference<0)&&(tierModifier===0)){barHolderClass='bar-display-holder negative'}
+
+  let modifierBarNumber = (tierModifier == 0) ? 0 : ((adjustedModifierNumber*(maxBarWidth/barDivisions))-pixelOffset);
+  let armorModifierCSS = `#${armorType}-modifier{width: ${modifierBarNumber}px; margin-left: ${pixelOffset}px; transition: width .5s}`;
+
+  let positiveBarContentBase= <div className='light-level-bar' id={`${armorType}`}></div>;
+  let negativeBarContentBase= <div className='light-level-bar' id={`${armorType}`}></div>;
+  let modifierBarContent= <div className='modifier-bar' id={`${armorType}-modifier`}></div>
+
+  if ((lightDifference>=0)&&(tierModifier===0)){
+    positiveBarContentBase= <div className='light-level-bar' id={`${armorType}`}>
+       <p className='gear-offset'>{lightDifferenceString}</p>
+    </div>
+  } else if(lightDifference>=0){
+        positiveBarContentBase= <div className='light-level-bar' id={`${armorType}`}>
+       <p className='gear-offset'>{lightDifferenceString}</p>
+    </div>
+  }else if (tierModifier !== 0){
+    negativeBarContentBase = null;
+  } else {
+    negativeBarContentBase = <div className='light-level-bar' id={`${armorType}`}>
+      <p className='gear-offset'>{lightDifferenceString}</p>
+    </div>
+  }
+  if (tierModifier !== 0) {
+    modifierBarContent = <div className='modifier-bar' id={`${armorType}-modifier`}>
+
+    </div>
+  }
 
   return (
     <div>
@@ -80,23 +99,28 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           margin-top: -8px;
           color: rgba(225, 224, 186, 1);
         }
-        .bar-display-holder{
+        .bar-display-holder-positive{
           position: absolute;
 
           bottom: 0px;
-          right: 0px;
           left: 140px;
           height: 100%;
           overflow: hidden;
           display: flex;
           justify-content: flex-start;
           align-items: center;
-          width: 540px;
         }
-        .negative{
+        .bar-display-holder-negative{
+          position: absolute;
+
+          bottom: 0px;
           right: 140px;
-          left: 0px; 
+          height: 100%;
+          overflow: hidden;
+          display: flex;
           justify-content: flex-end;
+          align-items: center;
+          width: 540px;
         }
         .gear-offset{
           color: white;
@@ -104,7 +128,7 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           margin: 10px;
         }
         ${armorBaseLightCSS}
-
+        ${armorModifierCSS}
 
         .light-level-bar{
           height: 100%;
@@ -125,8 +149,15 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           <p className="gear-light-level">{itemLightLevel}</p>
           <p className='gear-type'>{armorType}</p>
         </div>
-        <div className={barHolderClass}>
+        <div className='bar-display-holder-positive'>
           {positiveBarContentBase}
+          {modifierBarContent}
+        </div>
+        <div className='bar-display-holder-negative'>
+          {negativeBarContentBase}
+        </div>
+        <div className={barClass} >
+
         </div>
       </div>
 
