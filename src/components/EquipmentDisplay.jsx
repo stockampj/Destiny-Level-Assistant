@@ -54,7 +54,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
     });
   }
   console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'+ selectedTier)
-  let equipmentHolderAlignment = (selectedTier === 0) ? 'center' : 'flex-start';
+  let equipmentHolderAlignment = (selectedTier === 0) ? '45%' : '25%';
   console.log(equipmentHolderAlignment);
   
   
@@ -66,10 +66,8 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
           margin-left: -5px;
           padding-top: 140px;
           display: flex;
-          justify-content: ${equipmentHolderAlignment};
+          justify-content: flex-start;
           align-items: center;
-          margin-left: 20px;
-          margin-right: 20px;
         }
         .equipment-holder {
           display: flex;
@@ -81,6 +79,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
           color: white;
           position:relative;
           padding: 5px;
+          margin-left: ${equipmentHolderAlignment};
         }
         .hide-me{
           display: none;
