@@ -28,11 +28,10 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
 
   if (lightDifference<=0){
     pixelOffset= 0;
-    console.log('hello')
   }
 
   let modifierBarNumber = (tierModifier == 0) ? 0 : ((adjustedModifierNumber*(maxBarWidth/barDivisions))-pixelOffset);
-  let armorModifierCSS = `#${armorType}-modifier{width: ${modifierBarNumber}px; margin-left: ${pixelOffset}px;}`;
+  let armorModifierCSS = `#${armorType}-modifier{width: ${modifierBarNumber}px; margin-left: ${pixelOffset}px; transition: width .5s}`;
 
   let positiveBarContentBase= null;
   let negativeBarContentBase= null;
@@ -139,6 +138,7 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
         .modifier-bar{
           height: 100%;
           background-color: rgba(128, 198, 120,.3);
+          width: 0px;
         }
         .bar-display-holder-negative div{
           background-color: rgba(225, 173, 153,.3);

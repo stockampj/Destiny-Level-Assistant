@@ -4,7 +4,8 @@ import { fetchPlayerMembershipId } from './../actions';
 import PropTypes from 'prop-types';
 import Equipment from './Equipment';
 
-function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selectedTier }) {
+function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selectedTier, previousState }) {
+  
   let weapons = player.weapons;
   let charArmor;
   let lightLevelAverage;
@@ -53,9 +54,11 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
       equipmentToDisplay.push(gearJSX);
     });
   }
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'+ selectedTier)
-  let equipmentHolderAlignment = (selectedTier === 0) ? '45%' : '25%';
-  console.log(equipmentHolderAlignment);
+
+  let equipmentHolderClass = 'equipment-holder';
+  if (selectedTier!==0){
+    equipmentHolderClass = 'equipment-holder is-tier-selected-class';
+  }
   
   
   return (
@@ -79,8 +82,13 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
           color: white;
           position:relative;
           padding: 5px;
-          margin-left: ${equipmentHolderAlignment};
+          margin-left: 45%;
+          transition: margin-left .5s;
         }
+        .is-tier-selected-class{
+          margin-left: 25%;
+        }
+
         .hide-me{
           display: none;
         }
@@ -128,7 +136,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
 
 
 
-        <div className={'equipment-holder'}>
+        <div className={equipmentHolderClass}>
           <div className='light-display'>
             <p className="light-level-average">456</p>
             <div className='light-remainder-bar'></div>
@@ -215,7 +223,8 @@ const mapStateToProps = state => {
     player: state.player,
     selectedCharacter: state.selectedCharacter,
     manifest: state.manifest,
-    selectedTier: state.selectedTier
+    selectedTier: state.selectedTier,
+    previousState: state.previousState
   };
 };
 
