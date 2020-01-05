@@ -36,7 +36,7 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
     pixelOffset= 0;
   }
   let barHolderClass='bar-display-holder';
-  if ((lightDifference<0)&&(tierModifier===0)){barHolderClass='bar-display-holder negative'}
+  if ((lightDifference<0)&&(tierModifier===0)){barHolderClass='bar-display-holder-negative'}
 
   return (
     <div>
@@ -84,7 +84,6 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           position: absolute;
 
           bottom: 0px;
-          right: 0px;
           left: 140px;
           height: 100%;
           overflow: hidden;
@@ -93,10 +92,18 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           align-items: center;
           width: 540px;
         }
-        .negative{
+        .bar-display-holder-negative{
+          position: absolute;
+
+          bottom: 0px;
           right: 140px;
-          left: 0px; 
+          position: absolute;
+          height: 100%;
+          overflow: hidden;
+          display: flex;
           justify-content: flex-end;
+          align-items: center;
+          width: 540px;
         }
         .gear-offset{
           color: white;
