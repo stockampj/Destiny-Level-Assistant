@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect} from 'react-redux';
 
-function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxDeviation, selectedTier, dispatch}){
-  
+function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxDeviation, selectedTier, previousTier, dispatch}){
+
   let maxBarWidth = 540;
   let barDivisions = 6;
   let pixelOffset = 2;
   let tierModifier = selectedTier;
   let baseBarSize = () => {
-    console.log('hello')
     let width = 0;
     let lightDelta = itemLightLevel-lightLevelAverage;
     if (selectedTier === 0){
@@ -18,20 +17,25 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
       width = tierModifier-lightDelta;
       if (width<0){width=0};
     }
-    console.log(width);
     return width;
   }
-  baseBarSize();
   let lightDifference = itemLightLevel-lightLevelAverage;
+  let barValueDisplay = (selectedTier===0) ? ((lightDifference>0) ? `+${baseBarSize()}` : baseBarSize()*(-1)) : `+${baseBarSize()}`;
 
-  let lightDifferenceString = (lightDifference>=0) ? `+${lightDifference}` : `${lightDifference}`;
-  let barClass = (lightDifference>=0) ? 'gear-bar-positive' : 'gear-bar-negative';
   let percentageBarNumber = (Math.abs(baseBarSize()/barDivisions)>1) ? 1 : Math.abs(baseBarSize()/barDivisions);
   percentageBarNumber= parseInt(maxBarWidth*percentageBarNumber)
-  console.log(percentageBarNumber);
-  let armorBaseLightCSS = `#${armorType}{width: ${percentageBarNumber}px;transition: width .5s;}`;
-  let positiveBarContentBase= <div className='light-level-bar' id={`${armorType}`}></div>;
+  let gainClass = '';
+  if (selectedTier!==0){
+    if (baseBarSize()>=tierModifier){
+      gainClass= 'full-gain';
+    } else if (baseBarSize()>0){
+      gainClass= 'partial-gain';
+    }
+  }
 
+  let textFlexPosition = (tierModifier!==0) ? 'flex-end' : ((lightDifference>0) ? 'flex-end' : 'flex-start');
+  let armorBaseLightCSS = `#${armorType}{display: flex; justify-content: ${textFlexPosition};  width: ${percentageBarNumber}px; overflow: hidden; transition: width .5s, background-color 1s;}`;
+  let barContentBase = <div className={`light-level-bar ${gainClass}`} id={`${armorType}`}><p className='bar-value-display'>{barValueDisplay}</p></div>;
   if (lightDifference<=0){
     pixelOffset= 0;
   }
@@ -90,7 +94,7 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           display: flex;
           justify-content: flex-start;
           align-items: center;
-          width: 540px;
+          
         }
         .bar-display-holder-negative{
           position: absolute;
@@ -103,25 +107,28 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           display: flex;
           justify-content: flex-end;
           align-items: center;
-          width: 540px;
+          
         }
-        .gear-offset{
+        .bar-value-display{
           color: white;
           font-size: 30px;
           margin: 10px;
         }
         ${armorBaseLightCSS}
 
-
         .light-level-bar{
+          display: flex;
           height: 100%;
-          background-color: rgba(255, 255, 255,.3);
+          background-color: rgba(255, 255, 255,.4);
         }
-        .modifier-bar{
-          height: 100%;
-          background-color: rgba(128, 198, 120,.3);
-          width: 0px;
+        .full-gain{
+          background-color: rgba(194, 237, 255, 0.4);
+          box-shadow: inset 0px 0px 4px 1px rgba(255,255,255,.3);
         }
+        .partial-gain{
+          background-color: rgba(255, 255, 255,.4);
+        }
+
         .bar-display-holder-negative div{
           background-color: rgba(225, 173, 153,.3);
         }
@@ -133,7 +140,7 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           <p className='gear-type'>{armorType}</p>
         </div>
         <div className={barHolderClass}>
-          {positiveBarContentBase}
+          {barContentBase}
         </div>
       </div>
 

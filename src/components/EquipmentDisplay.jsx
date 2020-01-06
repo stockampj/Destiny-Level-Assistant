@@ -50,6 +50,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
         lightLevelAverage={lightLevelAverage}
         maxDeviation={maxDeviation}
         selectedTier = {selectedTier}
+        previousTier = {previousState.selectedTier}
       />;
       equipmentToDisplay.push(gearJSX);
     });
@@ -71,6 +72,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
           display: flex;
           justify-content: flex-start;
           align-items: center;
+          overflow: hidden;
         }
         .equipment-holder {
           display: flex;
@@ -116,10 +118,12 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
           height: 8px;
           width: ${lightReminderPercentagestring};
           background-color: rgba(255,255,255,.2);
+          transition: width .5s;
         }
       `}</style>
       <div className={'display-space'}>
-        <div className={`equipment-holder ${showComponentClass}`}>
+        
+        <div className={`${equipmentHolderClass} ${showComponentClass}`}>
           <div className='light-display'>
             <p className="light-level-average">{lightLevelAverage}</p>
             <div className='light-remainder-bar'></div>
@@ -136,7 +140,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
 
 
 
-        <div className={equipmentHolderClass}>
+        {/* <div className={equipmentHolderClass}>
           <div className='light-display'>
             <p className="light-level-average">456</p>
             <div className='light-remainder-bar'></div>
@@ -148,6 +152,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
             lightLevelAverage={456}
             maxDeviation={7}
             selectedTier = {selectedTier}
+            previousTier = {previousState.selectedTier}
           />
           <Equipment 
             armorType={'arms'}
@@ -156,6 +161,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
             lightLevelAverage={456}
             maxDeviation={7}
             selectedTier = {selectedTier}
+            previousTier = {previousState.selectedTier}
           />
           <Equipment 
             armorType={'chest'}
@@ -164,6 +170,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
             lightLevelAverage={456}
             maxDeviation={7}
             selectedTier = {selectedTier}
+            previousTier = {previousState.selectedTier}
           />
           <Equipment 
             armorType={'legs'}
@@ -172,6 +179,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
             lightLevelAverage={456}
             maxDeviation={7}
             selectedTier = {selectedTier}
+            previousTier = {previousState.selectedTier}
           />
           <Equipment 
             armorType={'class'}
@@ -180,6 +188,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
             lightLevelAverage={456}
             maxDeviation={7}
             selectedTier = {selectedTier}
+            previousTier = {previousState.selectedTier}
           />
           <Equipment 
             armorType={'primary'}
@@ -188,6 +197,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
             lightLevelAverage={456}
             maxDeviation={7}
             selectedTier = {selectedTier}
+            previousTier = {previousState.selectedTier}
           />
           <Equipment 
             armorType={'secondary'}
@@ -196,6 +206,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
             lightLevelAverage={456}
             maxDeviation={7}
             selectedTier = {selectedTier}
+            previousTier = {previousState.selectedTier}
           />
           <Equipment 
             armorType={'power'}
@@ -204,8 +215,9 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
             lightLevelAverage={456}
             maxDeviation={7}
             selectedTier = {selectedTier}
+            previousTier = {previousState.selectedTier}
           />  
-        </div>
+        </div> */}
 
 
 

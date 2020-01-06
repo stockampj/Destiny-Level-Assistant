@@ -26,6 +26,8 @@ function CharacterDisplay(props) {
   } else if (props.characterIndex ===3){
     backgroundClassName='emblem3';
   }
+  let borderHighlightClass = (isCurrentlySelected) ? 'highlight-border': '';
+
   return  (
     <div>
       <style jsx>{`
@@ -41,21 +43,25 @@ function CharacterDisplay(props) {
           border: solid 1px rgba(255,255,255,.3);
           background-color: rgba(0, 0, 0, .3);
           box-shadow: 4px 5px 5px -3px rgba(255,255,255,.1);
+          color: rgba(255,255,255,.6);
+          background-size: auto 102%;
+          background-position: top left;
+          background-repeat: no-repeat;
+          transition: margin-top .2s, color .1s, box-shadow .2s;
+        }
+        .display-holder:hover {
+          box-shadow: 4px 5px 5px -3px rgba(255,255,255,.3);
+          color: rgba(255,255,255,.8);
+          margin-top: 3px;
         }
         .emblem1 {
           background-image: ${bannerURL1};
-          background-position: cover;
-          background-repeat: none;
         }
         .emblem2 {
-          background-image: ${bannerURL2};
-          background-position: cover;
-          background-repeat: none;
+          background-image: ${bannerURL2};     
         }
         .emblem3 {
-          background-image: ${bannerURL3};
-          background-position: cover;
-          background-repeat: none;
+          background-image: ${bannerURL3};      
         }
         .titles {
           display: flex;
@@ -71,7 +77,6 @@ function CharacterDisplay(props) {
           font-weight: 100;
           margin: 0;
           font-family: 'Oswald', sans-serif;
-          color: rgba(255,255,255,.6)
         }
         .characterRace {
           margin: 5px;
@@ -79,11 +84,21 @@ function CharacterDisplay(props) {
           font-weight: 100;
           margin: 0;
           font-family: 'EB Garamond', serif;
-          color: rgba(255,255,255,.6)
+        }
+        .highlight-border {
+          border: solid 1px rgba(255,255,255,.4);
+          color: rgba(255,255,255,.8);
+          box-shadow: 4px 5px 5px -3px rgba(255,255,255,.3), inset 0px 0px 8px 1px rgba(255,255,255,.4);
+        }
+        .highlight-border:hover {
+          border: solid 1px rgba(255,255,255,.4);
+          color: rgba(255,255,255,.8);
+          box-shadow: 4px 5px 5px -3px rgba(255,255,255,.3), inset 0px 0px 8px 1px rgba(255,255,255,.4);
+          margin-top: 3px;
         }
         
       `}</style>
-      <div className={`display-holder ${backgroundClassName}`} onClick={onCharacterChange}>
+      <div className={`display-holder ${backgroundClassName} ${borderHighlightClass}`} onClick={onCharacterChange}>
         <div className="titles">
           <h3 className='characterClass'>{classDefinitions[props.classHash]}</h3>
           <h3 className='characterRace'>{classDefinitions[props.raceHash]}</h3>
