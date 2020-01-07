@@ -34,32 +34,38 @@ function TierSelector({ dispatch, selectedTier}){
           <TierButton 
             tierName='Gear-View'
             index={0}
-            onTierSelection = {handleTierSelection}   
+            onTierSelection = {handleTierSelection}
+            selectedTier = {selectedTier}   
           />
           <TierButton 
             tierName='Normal'
             index={1}
-            onTierSelection = {handleTierSelection}   
+            onTierSelection = {handleTierSelection}
+            selectedTier = {selectedTier}   
           />
           <TierButton 
             tierName='Tier 1'
             index={3}
-            onTierSelection = {handleTierSelection}   
+            onTierSelection = {handleTierSelection}
+            selectedTier = {selectedTier}   
           />
           <TierButton 
             tierName='Tier 2'
             index={4}
-            onTierSelection = {handleTierSelection}   
+            onTierSelection = {handleTierSelection}
+            selectedTier = {selectedTier}   
           />
           <TierButton 
             tierName='Tier 3'
             index={5}
             onTierSelection = {handleTierSelection}
+            selectedTier = {selectedTier}
           />
           <TierButton 
             tierName='Pinnacle'
             index={6}
             onTierSelection = {handleTierSelection}
+            selectedTier = {selectedTier}
           />
 
       </div>

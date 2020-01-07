@@ -30,7 +30,7 @@ function CharacterDisplay(props) {
 
   return  (
     <div>
-      <style jsx>{`
+      <style>{`
         .display-holder {
           display: flex;
           align-items: center;
