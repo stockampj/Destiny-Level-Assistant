@@ -15,23 +15,24 @@ function TierSelector({ dispatch, selectedTier}){
   return (
     <div>
       <style>{`
-        .bottom-nav-row {
+        .side-nav-column {
           position: fixed;
           bottom: 0px;
-          left: 0px;
-          height: 75px;
-          width: 100%;
+          right: 0px;
+          height: 80%;
           display: flex;
-          justify-content: space-around;
+          justify-content: flex-end;
           align-items: flex-end;
+          flex-direction: column-reverse;
           overflow: hidden;
           z-index: 1;
           color: white;
+          padding: 20px;
         }
       `}</style>
-      <div className='bottom-nav-row'>
+      <div className='side-nav-column'>
           <TierButton 
-            tierName='Reset'
+            tierName='Gear-View'
             index={0}
             onTierSelection = {handleTierSelection}   
           />
@@ -60,6 +61,7 @@ function TierSelector({ dispatch, selectedTier}){
             index={6}
             onTierSelection = {handleTierSelection}
           />
+
       </div>
     </div>
   );

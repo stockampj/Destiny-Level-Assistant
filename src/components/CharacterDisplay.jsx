@@ -43,11 +43,11 @@ function CharacterDisplay(props) {
           border: solid 1px rgba(255,255,255,.3);
           background-color: rgba(0, 0, 0, .3);
           box-shadow: 4px 5px 5px -3px rgba(255,255,255,.1);
-          color: rgba(255,255,255,.6);
+          color: rgba(255,255,255,.5);
           background-size: auto 102%;
-          background-position: top left;
+          background-position: top left -2px;
           background-repeat: no-repeat;
-          transition: margin-top .2s, color .1s, box-shadow .2s;
+          transition: margin-top .2s, color .1s, box-shadow .1s;
         }
         .display-holder:hover {
           box-shadow: 4px 5px 5px -3px rgba(255,255,255,.3);
@@ -94,7 +94,7 @@ function CharacterDisplay(props) {
           border: solid 1px rgba(255,255,255,.4);
           color: rgba(255,255,255,.8);
           box-shadow: 4px 5px 5px -3px rgba(255,255,255,.3), inset 0px 0px 8px 1px rgba(255,255,255,.4);
-          margin-top: 3px;
+          margin-top: 5px;
         }
         
       `}</style>
