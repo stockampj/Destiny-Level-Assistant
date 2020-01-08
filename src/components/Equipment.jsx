@@ -41,16 +41,14 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
     }
   }
 
-  let outOfRange = () =>{
-    let html = (baseBarSize()<=barDivisions) ? null : <div className='out-of-range-cap'></div>;
+  let endCap = () =>{
+    let html = (baseBarSize()<=barDivisions) ? <div className='bar-end-cap'></div> : <div className='bar-end-cap out-of-range-cap'></div>;
     return html;
   }
- 
- 
 
   let textFlexPosition = (tierModifier!==0) ? 'flex-end' : ((lightDifference>0) ? 'flex-end' : 'flex-start');
   let armorBaseLightCSS = `#${armorType}{display: flex; justify-content: ${textFlexPosition};  width: ${percentageBarNumber}px; overflow: hidden; transition: width .5s, background-color 1s;}`;
-  let barContentBase = <div className={`light-level-bar`} id={`${armorType}`}><p className='bar-value-display'>{barValueDisplay}</p>{lightGainRating()}{outOfRange()}</div>;
+  let barContentBase = <div className={`light-level-bar`} id={`${armorType}`}><p className='bar-value-display'>{barValueDisplay}</p>{lightGainRating()}{endCap()}</div>;
   if (lightDifference<=0){
     pixelOffset= 0;
   }
@@ -136,14 +134,19 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           background-color: rgba(255, 255, 255,.4);
           overflow: hidden;
         }
-        .out-of-range-cap {
+        .bar-end-cap{
           position: absolute;
-          right: -20px;
+          right: 0px;
           width: 0;
           height: 0;
           border-style: solid;
-          border-width: 30px 0 30px 20px;
+          border-width: 30px 0 30px 0px;
           border-color: transparent transparent transparent rgba(255, 255, 255,.4);
+          transition: border-width .7s, right .7s;
+        }
+        .out-of-range-cap {
+          border-width: 30px 0 30px 20px;
+          right: -20px;
         }
 
         .bar-display-holder-negative div{
