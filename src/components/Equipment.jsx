@@ -24,16 +24,15 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
 
   let percentageBarNumber = (Math.abs(baseBarSize()/barDivisions)>1) ? 1 : Math.abs(baseBarSize()/barDivisions);
   percentageBarNumber= parseInt(maxBarWidth*percentageBarNumber);
-
   
   let lightGainRating = () =>{
     if (selectedTier !== 0){
-      if (baseBarSize()>tierModifier){
-        return 'full'
+      if (baseBarSize()>=tierModifier){
+        return <div className={`${armorType}full-gain-indicator`}></div>;
       } else if (baseBarSize()>0){
-        return 'partial'
+        return <div className={`${armorType}partial-gain-indicator`}></div>;
       } else if (baseBarSize()===0){
-        return 'loss'
+        return <div className={`${armorType}loss-indicator`}></div>;
       } else {
         return null;
       }
@@ -41,24 +40,17 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
       return null;
     }
   }
- 
-  let ratingIndicator = () => {
-    switch(lightGainRating()){
-      case 'full':
-        return <div className='full-gain-indicator'></div>;
-      case 'partial':
-        return <div className='partial-gain-indicator'></div>;
-      case 'loss':
-        return <div className='loss-indicator'></div>;
-      default:
-        return null;
-    };
+
+  let outOfRange = () =>{
+    let html = (baseBarSize()<=barDivisions) ? null : <div className='out-of-range-cap'></div>;
+    return html;
   }
+ 
  
 
   let textFlexPosition = (tierModifier!==0) ? 'flex-end' : ((lightDifference>0) ? 'flex-end' : 'flex-start');
   let armorBaseLightCSS = `#${armorType}{display: flex; justify-content: ${textFlexPosition};  width: ${percentageBarNumber}px; overflow: hidden; transition: width .5s, background-color 1s;}`;
-  let barContentBase = <div className={`light-level-bar`} id={`${armorType}`}><p className='bar-value-display'>{barValueDisplay}</p></div>;
+  let barContentBase = <div className={`light-level-bar`} id={`${armorType}`}><p className='bar-value-display'>{barValueDisplay}</p>{lightGainRating()}{outOfRange()}</div>;
   if (lightDifference<=0){
     pixelOffset= 0;
   }
@@ -113,7 +105,6 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           bottom: 0px;
           left: 140px;
           height: 100%;
-          overflow: hidden;
           display: flex;
           justify-content: flex-start;
           align-items: center;
@@ -143,37 +134,30 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           display: flex;
           height: 100%;
           background-color: rgba(255, 255, 255,.4);
+          overflow: hidden;
+        }
+        .out-of-range-cap {
+          position: absolute;
+          right: -20px;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 30px 0 30px 20px;
+          border-color: transparent transparent transparent rgba(255, 255, 255,.4);
         }
 
         .bar-display-holder-negative div{
           background-color: rgba(225, 173, 153,.3);
         }
-        .full-gain-indicator{
+        .${armorType}loss-indicator{
           position: absolute;
-          right: -65px;
-          top: 15px;
-          border-radius: 50%;
-          height: 30px;
-          width: 30px;
-          background-color: rgba(194, 237, 255, 0.5);
-        }
-        .partial-gain-indicator{
-          position: absolute;
-          right: -65px;
-          top: 15px;
-          border-radius: 50%;
-          height: 30px;
-          width: 30px;
-          background-color: rgba(251, 250, 143, 0.5);
-        }
-        .loss-indicator{
-          position: absolute;
-          right: -65px;
+          right: -45px;
           top: 15px;
           border-radius: 50%;
           height: 30px;
           width: 30px;
           background-color: rgba(225, 173, 153,.5);
+          transition: color 1s;
         }
       `}</style>
       <div className='individual-equipment-holder'>
@@ -182,7 +166,6 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           <p className="gear-light-level">{itemLightLevel}</p>
           <p className='gear-type'>{armorType}</p>
         </div>
-        {ratingIndicator()}
         <div className={barHolderClass}>
           {barContentBase}
         </div>
@@ -199,3 +182,36 @@ Equipment.propTypes = {
 };
 
 export default connect()(Equipment);
+
+// let modifierPercentageBarNumber = ()=>{
+//   let modifierNumber;
+
+//   if (lightDifference>=0){
+//     console.log('selected Tier ' + selectedTier + ' basebarsize '+ baseBarSize())
+//     modifierNumber = (baseBarSize()>selectedTier) ?  selectedTier : baseBarSize();
+//     console.log('modifier number: '+ modifierNumber);
+//   } else {
+//     modifierNumber= selectedTier;
+//   }
+//   return parseInt(maxBarWidth*modifierNumber/barDivisions);
+// }
+
+// .${armorType}full-gain-indicator{
+          
+//   position: absolute;
+//   bottom: 0px;
+//   right: 0px;
+//   height: 59px;
+//   width: ${modifierPercentageBarNumber()}px;
+//   background-color: rgba(194, 237, 255, 0.5);
+//   transition: width .5s, color 1s;
+// }
+// .${armorType}partial-gain-indicator{
+//   position: absolute;
+//   bottom: 0px;
+//   right: 0px;
+//   height: 59px;
+//   width: ${modifierPercentageBarNumber()}px;
+//   background-color: rgba(251, 250, 143, 0.5);
+//   transition: width .5s, color 1s;
+// }
