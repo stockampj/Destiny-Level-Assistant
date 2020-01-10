@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect} from 'react-redux';
 
-function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxDeviation, selectedTier, previousTier, dispatch}){
+function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, lightRemainder,maxDeviation, selectedTier, previousTier, dispatch}){
 
   let maxBarWidth = 540;
   let barDivisions = 6;
@@ -24,7 +24,17 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
 
   let percentageBarNumber = (Math.abs(baseBarSize()/barDivisions)>1) ? 1 : Math.abs(baseBarSize()/barDivisions);
   percentageBarNumber= parseInt(maxBarWidth*percentageBarNumber);
-  
+
+  let projectedLight = () =>{
+    let number = parseInt(lightLevelAverage+(lightRemainder+baseBarSize())/8);
+    if (selectedTier === 0 || number === lightLevelAverage){
+      return null;
+    } else {
+      return <span className={`${armorType}projected-light`}>{number}</span>;
+    }
+  }
+
+  projectedLight();
   let lightGainRating = () =>{
     if (selectedTier !== 0){
       if (baseBarSize()>=tierModifier){
@@ -48,7 +58,7 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
 
   let textFlexPosition = (tierModifier!==0) ? 'flex-end' : ((lightDifference>0) ? 'flex-end' : 'flex-start');
   let armorBaseLightCSS = `#${armorType}{display: flex; justify-content: ${textFlexPosition};  width: ${percentageBarNumber}px; overflow: hidden; transition: width .5s, background-color 1s;}`;
-  let barContentBase = <div className={`light-level-bar`} id={`${armorType}`}><p className='bar-value-display'>{barValueDisplay}</p>{lightGainRating()}{endCap()}</div>;
+  let barContentBase = <div className={`light-level-bar`} id={`${armorType}`}><p className='bar-value-display'>{barValueDisplay}{projectedLight()}</p>{lightGainRating()}{endCap()}</div>;
   if (lightDifference<=0){
     pixelOffset= 0;
   }
@@ -161,6 +171,12 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, maxD
           width: 30px;
           background-color: rgba(225, 173, 153,.5);
           transition: color 1s;
+        }
+        .${armorType}projected-light{
+          position: absolute;
+          right: -80px;
+          font-size: 30px;
+          color: rgba(245, 200, 1);
         }
       `}</style>
       <div className='individual-equipment-holder'>

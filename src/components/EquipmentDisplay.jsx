@@ -29,10 +29,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
     });
     lightLevelAverage = parseInt(sum/lightAverageMatrix.length);
     lightRemainder = sum%lightAverageMatrix.length;
-    if(lightRemainder===0){
-      lightRemainder=8;
-    }
-    lightReminderPercentagestring = `${(lightRemainder/8)*100}%`;
+    lightReminderPercentagestring = (lightRemainder===0) ? `100%` : `${(lightRemainder/8)*100}%`;
     maxDeviation=Math.abs(Math.max(...lightAverageMatrix)-lightLevelAverage)
     Object.keys(equipmentObject).forEach(key=>{
       let gear=equipmentObject[key];
@@ -48,6 +45,7 @@ function EquipmentDisplay({ dispatch, player, selectedCharacter, manifest, selec
         iconPath={path}
         itemLightLevel={gear.itemLightLevel}
         lightLevelAverage={lightLevelAverage}
+        lightRemainder={lightRemainder}
         maxDeviation={maxDeviation}
         selectedTier = {selectedTier}
         previousTier = {previousState.selectedTier}

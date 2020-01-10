@@ -53,6 +53,7 @@ function CharacterDisplay(props) {
           box-shadow: 4px 5px 5px -3px rgba(255,255,255,.3);
           color: rgba(255,255,255,.8);
           margin-top: 3px;
+          cursor: pointer;
         }
         .emblem1 {
           background-image: ${bannerURL1};
@@ -95,6 +96,7 @@ function CharacterDisplay(props) {
           color: rgba(255,255,255,.8);
           box-shadow: 4px 5px 5px -3px rgba(255,255,255,.3), inset 0px 0px 8px 1px rgba(255,255,255,.4);
           margin-top: 5px;
+          cursor: default;
         }
         
       `}</style>

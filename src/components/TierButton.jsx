@@ -24,6 +24,7 @@ function TierButton (props){
             margin-right: 2px;
             box-shadow: 4px 5px 5px -3px rgba(255,255,255,.3);
             color: rgba(255,255,255,1);
+            cursor: pointer;
           }
           .currently-selected {
             background-color: rgba(194, 237, 255, 0.6);
@@ -36,6 +37,7 @@ function TierButton (props){
             margin-right: 0px;
             color: rgba(255,255,255,1);
             box-shadow: 4px 5px 5px -3px rgba(255,255,255,.4), inset 0px 0px 8px 1px rgba(255,255,255,.2);
+            cursor: default;
           }
           .tier-name{
             font-size: 2em;
