@@ -34,7 +34,6 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, ligh
     }
   }
 
-  projectedLight();
   let lightGainRating = () =>{
     if (selectedTier !== 0){
       if (baseBarSize()>=tierModifier){
@@ -58,7 +57,7 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, ligh
 
   let textFlexPosition = (tierModifier!==0) ? 'flex-end' : ((lightDifference>0) ? 'flex-end' : 'flex-start');
   let armorBaseLightCSS = `#${armorType}{display: flex; justify-content: ${textFlexPosition};  width: ${percentageBarNumber}px; overflow: hidden; transition: width .5s, background-color 1s;}`;
-  let barContentBase = <div className={`light-level-bar`} id={`${armorType}`}><p className='bar-value-display'>{barValueDisplay}{projectedLight()}</p>{lightGainRating()}{endCap()}</div>;
+  let barContentBase = <div className={`light-level-bar`} id={`${armorType}`}><p className='bar-value-display'>{barValueDisplay}{projectedLight()}</p>{endCap()}</div>;
   if (lightDifference<=0){
     pixelOffset= 0;
   }
@@ -164,7 +163,7 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, ligh
         }
         .${armorType}loss-indicator{
           position: absolute;
-          right: -45px;
+          right: -50px;
           top: 15px;
           border-radius: 50%;
           height: 30px;
@@ -174,13 +173,14 @@ function Equipment({armorType, iconPath, itemLightLevel, lightLevelAverage, ligh
         }
         .${armorType}projected-light{
           position: absolute;
-          right: -80px;
+          left: -200px;
           font-size: 30px;
           color: rgba(245, 200, 1);
         }
       `}</style>
       <div className='individual-equipment-holder'>
         <img className='gear-icon' src={iconPath} alt=""/>
+        {lightGainRating()}
         <div className='gear-type-holder'>
           <p className="gear-light-level">{itemLightLevel}</p>
           <p className='gear-type'>{armorType}</p>

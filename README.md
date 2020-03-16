@@ -6,7 +6,9 @@
 
 ## Description
 
-_This app is still in development. The purpose of this application is help players of the game Destiny 2 (developed by Bungie), decide which type of reward would be the most beneficial for them to pursue next, given their particular gear profile._
+_This app is still in development. The purpose of this application is help players of the game Destiny 2 (developed by Bungie), decide which type of reward would be the most beneficial for them to pursue next, given their particular gear profile.
+
+Check out a video of it in action: https://youtu.be/td6CpMCYkh4_
 
 ## Specifications
 

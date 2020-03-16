@@ -7,7 +7,8 @@ export const changeState = (value1) => ({
   value1
 });
 
-const apiKey = process.env.apiKey;
+let apiKey = process.env.apiKey;
+apiKey = 'bd67d9ad9aca4084a9794f755888ae6c';
 const requestHeaderGET = ({
   headers: {
     'x-api-key': `${apiKey}`

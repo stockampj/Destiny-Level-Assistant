@@ -34,10 +34,11 @@ function PlayerSearch({ dispatch, userName }) {
           .playerSearch-button{
             position: absolute;
             right: 25px;
-            top: 7px;
+            top: 5px;
             height: 34px;
             width: 60px;
-            background-color: rgba(230,230,230,1)
+            border: thin;
+            background-color: rgba(194, 237, 255, 0.8);
           }
           .manifest-button{
             position: absolute;
@@ -46,7 +47,7 @@ function PlayerSearch({ dispatch, userName }) {
             height: 34px;
             width: 10px;
             border: thin;
-            background-color: rgba(100,100,100,1)
+            background-color: rgba(194, 237, 255, 0.8);
           }
           .name-holder {
             position: absolute;
