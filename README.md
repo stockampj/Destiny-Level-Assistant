@@ -15,14 +15,14 @@ Check out a video of it in action: https://youtu.be/td6CpMCYkh4_
 
 * #### API Call to Bungie.net
 | Spec | Input| Output|
-|:|:|:|
+|---:|---:|---:|
 |Web-app that will make an api call to retrieve the character's current stats |Robot Chickens| X-box live profile with 3 characters and 8 gear slots|
 |App will pull completed activities, and return a list of activities currently available to character. |Robot Chickens | Recommendation: character can pursue the following 3 activities to maximize their character level gains|
 
 
 * #### Visual Feedback on current state
 | Spec                      |Input          | Output |
-|:|:|:|
+|---:|---:|---:|
 |A user can see their current character's light level profile with each piece of gear showing its level | warlock | head: 365, arms: 364, chest: 370, legs: 363, class item: 369, primary: 366, secondary: 367, power: 363|
 |A user can see how a particular gear drop will impact their level profile|tier 1|overall light level has 34% chance of increasing|
 
